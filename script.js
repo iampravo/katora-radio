@@ -93,6 +93,7 @@ let ytReady = false;
 let playerStarted = false;
 let ambientOn = false;
 let ambientLoadedScene = null;
+let isMuted = false;
 let currentRotationSongs = [];
 let currentSongIndex = 0;
 let currentScene = null;
@@ -106,6 +107,11 @@ const rotationLabel = el('rotationLabel');
 const playBtn = el('playBtn');
 const playIcon = el('playIcon');
 const pauseIcon = el('pauseIcon');
+const prevBtn = el('prevBtn');
+const nextBtn = el('nextBtn');
+const muteBtn = el('muteBtn');
+const volumeIcon = el('volumeIcon');
+const mutedIcon = el('mutedIcon');
 const progressFill = el('progressFill');
 const ambientToggle = el('ambientToggle');
 const ambientAudio = el('ambientAudio');
@@ -218,10 +224,15 @@ function loadSong(index, seekSeconds) {
   }
 }
 
-function advanceToNext() {
-  const nextIndex = (currentSongIndex + 1) % currentRotationSongs.length;
+function goToSong(delta) {
+  const len = currentRotationSongs.length;
+  const nextIndex = (currentSongIndex + delta + len) % len;
   loadSong(nextIndex, 0);
   if (playerStarted) ytPlayer.playVideo();
+}
+
+function advanceToNext() {
+  goToSong(1);
 }
 
 function refreshRotationIfChanged() {
@@ -288,6 +299,26 @@ playBtn.addEventListener('click', () => {
     setPlayingUI(true);
     startProgressLoop();
   }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (!ytReady) return;
+  goToSong(-1);
+});
+
+nextBtn.addEventListener('click', () => {
+  if (!ytReady) return;
+  goToSong(1);
+});
+
+muteBtn.addEventListener('click', () => {
+  if (!ytReady) return;
+  isMuted = !isMuted;
+  if (isMuted) ytPlayer.mute(); else ytPlayer.unMute();
+  volumeIcon.style.display = isMuted ? 'none' : '';
+  mutedIcon.style.display = isMuted ? '' : 'none';
+  muteBtn.classList.toggle('active', isMuted);
+  muteBtn.title = isMuted ? 'unmute' : 'mute';
 });
 
 // ---------- background music (ambient layer, loaded only on request) ----------
