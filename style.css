@@ -301,16 +301,17 @@ body {
 .disclaimer {
   position: fixed;
   bottom: 14px;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
   text-align: center;
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
   font-size: 9.5px;
   font-weight: 400;
   color: rgba(244, 239, 230, 0.55);
-  line-height: 1.55;
-  padding: 0 20px;
+  line-height: 1.65;
+  max-width: 480px;
+  width: calc(100% - 40px);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
   pointer-events: none;
 }
