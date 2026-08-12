@@ -84,9 +84,9 @@
     <span class="disclaimer-line"><a href="https://iampravo.vercel.app/" target="_blank" rel="noopener">crafted by iampravo</a></span>
   </p>
 
-  <div id="ytPlayer" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0;"></div>
+  <div id="ytPlayer" class="yt-embed"></div>
   <audio id="ambientAudio" loop preload="none"></audio>
-  <canvas id="shareCanvas" width="1080" height="1080" style="display:none"></canvas>
+  <canvas id="shareCanvas" width="1080" height="1080" hidden></canvas>
 
   <div class="modal-overlay" id="removalOverlay" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="removalTitle">
@@ -107,7 +107,18 @@
     </div>
   </div>
 
+  <script>
+    // type="module" scripts (js/main.js) run deferred, after the document is
+    // parsed — but the YouTube iframe API can call window.onYouTubeIframeAPIReady
+    // before that if it loads fast. This tiny classic script runs immediately,
+    // so the callback always exists in time; it just buffers the "ready" signal
+    // (flag + event) for player.js to pick up whenever it actually loads.
+    window.onYouTubeIframeAPIReady = function () {
+      window.__ytApiReady = true;
+      document.dispatchEvent(new Event('youtube-iframe-api-ready'));
+    };
+  </script>
   <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

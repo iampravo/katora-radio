@@ -3,6 +3,9 @@
 // this site's no-build-step philosophy). Auto-detected from /api by Vercel,
 // no config needed.
 
+const MAX_MESSAGE_LENGTH = 2000;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ success: false, error: 'Method not allowed' });
@@ -10,8 +13,19 @@ module.exports = async (req, res) => {
   }
 
   const { message, fromEmail } = req.body || {};
-  if (!message || typeof message !== 'string' || !message.trim()) {
+  const trimmedMessage = typeof message === 'string' ? message.trim() : '';
+  if (!trimmedMessage) {
     res.status(400).json({ success: false, error: 'Please describe which song and why.' });
+    return;
+  }
+  if (trimmedMessage.length > MAX_MESSAGE_LENGTH) {
+    res.status(400).json({ success: false, error: `Message is too long (max ${MAX_MESSAGE_LENGTH} characters).` });
+    return;
+  }
+
+  const trimmedEmail = typeof fromEmail === 'string' ? fromEmail.trim() : '';
+  if (trimmedEmail && !EMAIL_PATTERN.test(trimmedEmail)) {
+    res.status(400).json({ success: false, error: 'That email address doesn\'t look right.' });
     return;
   }
 
@@ -32,9 +46,9 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         from: 'mera radio <onboarding@resend.dev>',
         to: recipient,
-        reply_to: fromEmail && fromEmail.trim() ? fromEmail.trim() : undefined,
+        reply_to: trimmedEmail || undefined,
         subject: 'mera radio — song removal request',
-        text: `${message.trim()}\n\n—\nRequester email: ${fromEmail && fromEmail.trim() ? fromEmail.trim() : '(not provided)'}`,
+        text: `${trimmedMessage}\n\n—\nRequester email: ${trimmedEmail || '(not provided)'}`,
       }),
     });
 

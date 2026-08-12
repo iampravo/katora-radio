@@ -24,6 +24,16 @@ body {
   font-family: 'Archivo Narrow', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Visually hidden but present in the DOM — the YouTube iframe needs a real,
+   sized element to attach to. */
+.yt-embed {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
 /* Instant CSS gradient paints immediately; the real GIF lazy-loads in on
    top of it and crossfades once ready — nothing here blocks first paint
    or the song being ready to play. */
