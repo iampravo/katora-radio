@@ -31,7 +31,7 @@ const GIF_ROTATE_MS = 25000;
 
 const ROTATIONS = {
   morning: {
-    label: 'Subah ka Rotation',
+    label: 'Morning Rotation',
     scene: 'barber',
     songs: [
       { title: 'Pehla Nasha', film: 'Jo Jeeta Wohi Sikandar (1992)', singers: 'Udit Narayan, Sadhana Sargam', youtubeId: 'Whe-8N0F0oQ' },
@@ -41,7 +41,7 @@ const ROTATIONS = {
     ],
   },
   afternoon: {
-    label: 'Dopahar ka Rotation',
+    label: 'Afternoon Rotation',
     scene: 'barber',
     songs: [
       { title: 'Tu Cheez Badi Hai Mast Mast', film: 'Mohra (1994)', singers: 'Udit Narayan, Kavita Krishnamurthy', youtubeId: 'DHWVkvhQB3U' },
@@ -50,7 +50,7 @@ const ROTATIONS = {
     ],
   },
   evening: {
-    label: 'Shaam ka Rotation',
+    label: 'Evening Rotation',
     scene: 'truck',
     songs: [
       { title: 'Didi Tera Devar Deewana', film: 'Hum Aapke Hain Koun (1994)', singers: 'Lata Mangeshkar, S. P. Balasubrahmanyam', youtubeId: 'SnPbVSvdlko' },
@@ -59,7 +59,7 @@ const ROTATIONS = {
     ],
   },
   night: {
-    label: 'Raat ka Rotation',
+    label: 'Late Night Rotation',
     scene: 'truck',
     songs: [
       { title: 'Sandese Aate Hai', film: 'Border (1997)', singers: 'Sonu Nigam, Roop Kumar Rathod', youtubeId: 'cgsCsXIzzBY' },
@@ -293,7 +293,7 @@ playBtn.addEventListener('click', () => {
 // ---------- background music (ambient layer, loaded only on request) ----------
 
 function updateAmbientButtonLabel() {
-  ambientToggle.title = `background music: ${ambientOn ? 'chalu' : 'band'}`;
+  ambientToggle.title = `background music: ${ambientOn ? 'on' : 'off'}`;
   ambientToggle.setAttribute('aria-label', ambientToggle.title);
   ambientToggle.classList.toggle('muted', !ambientOn);
 }
@@ -349,11 +349,11 @@ function drawShareCard(song) {
 
   ctx.fillStyle = '#D98A3D';
   ctx.font = '600 34px "IBM Plex Mono", monospace';
-  ctx.fillText('KATORA RADIO', 64, 110);
+  ctx.fillText('POCKET RADIO', 64, 110);
 
   ctx.fillStyle = 'rgba(244,239,230,0.6)';
   ctx.font = '500 24px "IBM Plex Mono", monospace';
-  ctx.fillText('ABHI CHAL RAHA HAI', 64, 400);
+  ctx.fillText('NOW PLAYING', 64, 400);
 
   ctx.fillStyle = '#F4EFE6';
   ctx.font = '600 56px "Archivo Narrow", sans-serif';
@@ -373,7 +373,7 @@ function drawShareCard(song) {
 
   ctx.fillStyle = 'rgba(244,239,230,0.55)';
   ctx.font = '500 20px "IBM Plex Mono", monospace';
-  ctx.fillText('katora.radio', 64, h - 70);
+  ctx.fillText('pocketradio.app', 64, h - 70);
 
   return canvas;
 }
@@ -406,7 +406,7 @@ shareBtn.addEventListener('click', () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'katora-radio-now-playing.png';
+    a.download = 'pocket-radio-now-playing.png';
     a.click();
     URL.revokeObjectURL(url);
     shareBtn.textContent = '✓';

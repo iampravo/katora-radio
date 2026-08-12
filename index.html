@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>katora radio</title>
-<meta name="description" content="90s Hindi gaane, playing live — tuned to whatever time it is in India right now.">
+<title>pocket radio</title>
+<meta name="description" content="90s Hindi songs, playing live — tuned to whatever time it is in India right now.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,25 +19,26 @@
   <header class="topbar">
     <div class="topbar-left">
       <div class="clock" id="clock">--:--</div>
-      <div class="rotation-label" id="rotationLabel">SUBAH KA ROTATION</div>
+      <div class="rotation-label" id="rotationLabel">MORNING ROTATION</div>
     </div>
     <div class="topbar-right">
-      <button type="button" class="pill-btn" id="ambientToggle" title="background music: band" aria-label="toggle background music">
+      <button type="button" class="pill-btn" id="ambientToggle" title="background music: off" aria-label="toggle background music">
         <span id="ambientIcon">&#9834;</span> background music
       </button>
-      <button type="button" class="pill-btn" id="shareBtn" title="share ye gaana" aria-label="share ye gaana">&#10697; share</button>
+      <button type="button" class="pill-btn" id="shareBtn" title="share this song" aria-label="share this song">&#10697; share</button>
     </div>
   </header>
 
   <div class="hero">
-    <h1 class="wordmark">katora radio</h1>
-    <p class="tagline">purane gaane, poora vibe</p>
+    <h1 class="wordmark">pocket radio</h1>
+    <p class="tagline">old songs, right in your pocket</p>
+    <p class="hindi-accent">पुराने गाने, आपकी जेब में</p>
   </div>
 
   <footer class="player-bar">
     <img class="art" id="trackArt" alt="" width="52" height="52">
     <div class="player-info">
-      <div class="track-title" id="trackTitle">gaana aa raha hai&hellip;</div>
+      <div class="track-title" id="trackTitle">tuning in&hellip;</div>
       <div class="track-meta" id="trackMeta">&nbsp;</div>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
@@ -47,7 +48,7 @@
     </button>
   </footer>
 
-  <p class="disclaimer">gaana poora YouTube se hi bajta hai — artists aur labels ko utna hi milta hai jitna kisi normal view pe milta &middot; yeh fan-made rotation hai, official channel nahi &middot; <a id="removalLink" href="mailto:hello@katora.radio">gaana hatwana hai? bata do</a> &middot; <a href="https://iampravo.vercel.app/" target="_blank" rel="noopener">crafted by iampravo</a></p>
+  <p class="disclaimer">every song plays through YouTube, so artists and labels get paid the same as any other view &middot; this is a fan-made rotation, not an official channel &middot; <a id="removalLink" href="mailto:hello@pocketradio.app">want a song removed? let us know</a> &middot; <a href="https://iampravo.vercel.app/" target="_blank" rel="noopener">crafted by iampravo</a></p>
 
   <div id="ytPlayer" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0;"></div>
   <audio id="ambientAudio" loop preload="none"></audio>
