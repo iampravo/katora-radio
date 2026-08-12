@@ -158,29 +158,25 @@ body {
   font-weight: 400;
   font-size: clamp(38px, 10.5vw, 82px);
   letter-spacing: 0;
+  background: linear-gradient(90deg, #FF9D4D 0%, #FF5C5C 45%, #FFD23F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(30, 14, 6, 0.35);
   text-shadow: 0 4px 30px rgba(0,0,0,0.55);
 }
 
+/* "HORN OK PLEASE" — the phrase every Indian truck tailgate carries,
+   set big, wide-tracked and bold like the hand-painted original. */
 .tagline {
-  margin: 6px 0 0;
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 13px;
-  font-weight: 500;
+  margin: 16px 0 0;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-weight: 700;
+  font-size: clamp(46px, 12.5vw, 100px);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(244, 239, 230, 0.75);
-  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-}
-
-.roman-name {
-  margin: 10px 0 0;
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(244, 239, 230, 0.45);
-  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  color: #FF5A36;
+  text-shadow: 0 3px 0 rgba(20, 8, 4, 0.55), 0 6px 24px rgba(0, 0, 0, 0.55);
 }
 
 /* ---------- bottom player bar ---------- */
