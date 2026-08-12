@@ -4,20 +4,30 @@
 // Each song's youtubeId is a verified, real upload (checked before adding).
 // Playback runs entirely through YouTube's own embedded player — see disclaimer in index.html.
 
-// Two visual/audio scenes, matched to the mood of each time-of-day rotation —
-// barber-shop mornings, highway-trucker evenings and nights.
+// Two scenes, matched to the mood of each time-of-day rotation — barber-shop
+// mornings, highway-trucker evenings and nights. No video: just a CSS
+// background treatment (class on #bgScene) plus an ambient track that only
+// loads once the listener opts into background music.
 const SCENES = {
   barber: {
-    video: 'assets/video/barber-india-bg',
-    poster: 'assets/video/barber-india-poster.jpg',
     ambient: 'assets/audio/ambience-chatter.mp3',
   },
   truck: {
-    video: 'assets/video/truck-bg',
-    poster: 'assets/video/truck-poster.jpg',
     ambient: 'assets/audio/highway-ambience.mp3',
   },
 };
+
+// Real dashcam-style footage (not illustrated), cycled behind the truck
+// scene. Lazy-loaded — see scheduleGifStart — so it never competes with
+// the song being ready to play.
+const TRUCK_GIFS = [
+  'assets/gif/truck-1.gif',
+  'assets/gif/truck-2.gif',
+  'assets/gif/truck-3.gif',
+  'assets/gif/truck-4.gif',
+  'assets/gif/truck-5.gif',
+];
+const GIF_ROTATE_MS = 25000;
 
 const ROTATIONS = {
   morning: {
@@ -81,7 +91,8 @@ function currentRotationKey(hour) {
 let ytPlayer = null;
 let ytReady = false;
 let playerStarted = false;
-let ambientOn = true;
+let ambientOn = false;
+let ambientLoadedScene = null;
 let currentRotationSongs = [];
 let currentSongIndex = 0;
 let currentScene = null;
@@ -99,27 +110,84 @@ const progressFill = el('progressFill');
 const ambientToggle = el('ambientToggle');
 const ambientAudio = el('ambientAudio');
 const shareBtn = el('shareBtn');
-const bgVideo = el('bgVideo');
+const bgScene = el('bgScene');
+const bgGif = el('bgGif');
+const clockEl = el('clock');
 
-// ---------- scene (video + ambient) ----------
+let gifRotationTimer = null;
+let gifIndex = 0;
 
-function applyScene(sceneKey) {
+// ---------- scene (background treatment + ambient track) ----------
+
+function setScene(sceneKey) {
   if (sceneKey === currentScene) return;
   currentScene = sceneKey;
-  const scene = SCENES[sceneKey];
+  bgScene.className = `bg-scene scene-${sceneKey}`;
 
-  bgVideo.poster = scene.poster;
-  bgVideo.innerHTML = `
-    <source src="${scene.video}.webm" type="video/webm">
-    <source src="${scene.video}.mp4" type="video/mp4">
-  `;
-  bgVideo.load();
-  bgVideo.play().catch(() => {});
+  if (sceneKey === 'truck') {
+    scheduleGifStart();
+  } else {
+    stopGifRotation();
+  }
 
-  const wasPlaying = ambientOn && playerStarted && !ambientAudio.paused;
-  ambientAudio.src = scene.ambient;
+  // Background music is opt-in — only re-point/re-fetch the ambient track
+  // if the listener already turned it on.
+  if (ambientOn) {
+    loadAmbientForCurrentScene();
+    ambientAudio.play().catch(() => {});
+  }
+}
+
+function loadAmbientForCurrentScene() {
+  if (ambientLoadedScene === currentScene) return;
+  ambientLoadedScene = currentScene;
+  ambientAudio.src = SCENES[currentScene].ambient;
   ambientAudio.load();
-  if (wasPlaying) ambientAudio.play().catch(() => {});
+}
+
+// ---------- background gif rotation (real footage, lazy) ----------
+
+function showGif(src) {
+  const img = new Image();
+  img.onload = () => {
+    if (currentScene !== 'truck') return; // scene may have changed while loading
+    bgGif.classList.remove('loaded');
+    bgGif.src = src;
+    requestAnimationFrame(() => bgGif.classList.add('loaded'));
+  };
+  img.src = src;
+}
+
+function startTruckGifRotation() {
+  showGif(TRUCK_GIFS[gifIndex]);
+  clearInterval(gifRotationTimer);
+  gifRotationTimer = setInterval(() => {
+    gifIndex = (gifIndex + 1) % TRUCK_GIFS.length;
+    showGif(TRUCK_GIFS[gifIndex]);
+  }, GIF_ROTATE_MS);
+}
+
+function stopGifRotation() {
+  clearInterval(gifRotationTimer);
+  gifRotationTimer = null;
+  bgGif.classList.remove('loaded');
+}
+
+// Song-ready is the priority — the (heavier) real-footage background only
+// starts fetching once the browser is idle, or after a short fallback delay,
+// so it never competes with the YouTube player becoming playable.
+function scheduleGifStart() {
+  if (gifRotationTimer) return;
+  const start = () => { if (currentScene === 'truck') startTruckGifRotation(); };
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
+  else setTimeout(start, 400);
+}
+
+// ---------- clock (IST — matches the rotation schedule) ----------
+
+function updateClock() {
+  const { hour, minute } = istParts();
+  clockEl.textContent = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
 }
 
 // ---------- rotation / scheduling ----------
@@ -160,7 +228,7 @@ function refreshRotationIfChanged() {
   const { key, rotation } = pickLiveStart();
   rotationLabel.textContent = rotation.label.toUpperCase();
   currentRotationSongs = rotation.songs;
-  applyScene(rotation.scene);
+  setScene(rotation.scene);
   return key;
 }
 
@@ -176,7 +244,7 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
         const { rotation, index, elapsedSeconds } = pickLiveStart();
         currentRotationSongs = rotation.songs;
         rotationLabel.textContent = rotation.label.toUpperCase();
-        applyScene(rotation.scene);
+        setScene(rotation.scene);
         loadSong(index, elapsedSeconds);
       },
       onStateChange: (e) => {
@@ -204,6 +272,8 @@ function startProgressLoop() {
   }, 500);
 }
 
+// Song playback is the first priority — this button only ever talks to the
+// YouTube player, never touches the ambient layer.
 playBtn.addEventListener('click', () => {
   if (!ytReady) return;
   const state = ytPlayer.getPlayerState();
@@ -211,29 +281,32 @@ playBtn.addEventListener('click', () => {
 
   if (isPlaying) {
     ytPlayer.pauseVideo();
-    ambientAudio.pause();
     setPlayingUI(false);
   } else {
     playerStarted = true;
     ytPlayer.playVideo();
-    if (ambientOn) ambientAudio.play().catch(() => {});
     setPlayingUI(true);
     startProgressLoop();
   }
 });
 
-// ---------- background music (ambient layer under the songs) ----------
+// ---------- background music (ambient layer, loaded only on request) ----------
 
 function updateAmbientButtonLabel() {
-  ambientToggle.innerHTML = `<span>&#9834;</span> background music: ${ambientOn ? 'chalu' : 'band'}`;
+  ambientToggle.title = `background music: ${ambientOn ? 'chalu' : 'band'}`;
+  ambientToggle.setAttribute('aria-label', ambientToggle.title);
   ambientToggle.classList.toggle('muted', !ambientOn);
 }
 
 ambientToggle.addEventListener('click', () => {
   ambientOn = !ambientOn;
   updateAmbientButtonLabel();
-  if (ambientOn && playerStarted) ambientAudio.play().catch(() => {});
-  if (!ambientOn) ambientAudio.pause();
+  if (ambientOn) {
+    loadAmbientForCurrentScene();
+    ambientAudio.play().catch(() => {});
+  } else {
+    ambientAudio.pause();
+  }
 });
 
 // time-of-day ambient volume: a little livelier midday, quieter late at night
@@ -326,7 +399,8 @@ shareBtn.addEventListener('click', () => {
   const song = currentRotationSongs[currentSongIndex];
   if (!song) return;
   const canvas = drawShareCard(song);
-  const original = shareBtn.textContent;
+  const originalIcon = shareBtn.textContent;
+  const originalTitle = shareBtn.title;
 
   canvas.toBlob((blob) => {
     const url = URL.createObjectURL(blob);
@@ -335,8 +409,12 @@ shareBtn.addEventListener('click', () => {
     a.download = 'katora-radio-now-playing.png';
     a.click();
     URL.revokeObjectURL(url);
-    shareBtn.textContent = '✓ saved';
-    setTimeout(() => { shareBtn.textContent = original; }, 1400);
+    shareBtn.textContent = '✓';
+    shareBtn.title = 'saved';
+    setTimeout(() => {
+      shareBtn.textContent = originalIcon;
+      shareBtn.title = originalTitle;
+    }, 1400);
   }, 'image/png');
 });
 
@@ -344,3 +422,5 @@ shareBtn.addEventListener('click', () => {
 
 updateAmbientButtonLabel();
 updateAmbientVolume();
+updateClock();
+setInterval(updateClock, 15000);

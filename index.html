@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>katora radio</title>
-<meta name="description" content="90s Hindi gaane, playing live — real video, real mahaul, tuned to whatever time it is in India right now.">
+<meta name="description" content="90s Hindi gaane, playing live — tuned to whatever time it is in India right now.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,49 +12,45 @@
 </head>
 <body>
 
-  <video class="bg-video" autoplay muted loop playsinline id="bgVideo"></video>
+  <div class="bg-scene" id="bgScene"></div>
+  <img class="bg-gif" id="bgGif" alt="">
   <div class="bg-overlay"></div>
 
-  <main class="page">
-    <header class="header">
-      <div class="wordmark">katora radio</div>
-      <div class="tagline">purane gaane, poora vibe</div>
-    </header>
-
-    <section class="console">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="clock" id="clock">--:--</div>
       <div class="rotation-label" id="rotationLabel">SUBAH KA ROTATION</div>
+    </div>
+    <div class="topbar-right">
+      <button type="button" class="pill-btn" id="ambientToggle" title="background music: band" aria-label="toggle background music">
+        <span id="ambientIcon">&#9834;</span> background music
+      </button>
+      <button type="button" class="pill-btn" id="shareBtn" title="share ye gaana" aria-label="share ye gaana">&#10697; share</button>
+    </div>
+  </header>
 
-      <div class="now-playing">
-        <img class="art" id="trackArt" alt="" width="72" height="72">
-        <div class="track-info">
-          <div class="track-title" id="trackTitle">gaana aa raha hai&hellip;</div>
-          <div class="track-meta" id="trackMeta">&nbsp;</div>
-        </div>
-        <button type="button" class="play-btn" id="playBtn" aria-label="play">
-          <svg id="playIcon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M4 2.5 L15 9 L4 15.5 Z"/></svg>
-          <svg id="pauseIcon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" style="display:none"><rect x="3" y="2" width="4" height="14"/><rect x="11" y="2" width="4" height="14"/></svg>
-        </button>
-      </div>
+  <div class="hero">
+    <h1 class="wordmark">katora radio</h1>
+    <p class="tagline">purane gaane, poora vibe</p>
+  </div>
 
-      <div class="progress-row">
-        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      </div>
+  <footer class="player-bar">
+    <img class="art" id="trackArt" alt="" width="52" height="52">
+    <div class="player-info">
+      <div class="track-title" id="trackTitle">gaana aa raha hai&hellip;</div>
+      <div class="track-meta" id="trackMeta">&nbsp;</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <button type="button" class="play-btn" id="playBtn" aria-label="play">
+      <svg id="playIcon" width="20" height="20" viewBox="0 0 18 18" fill="currentColor"><path d="M4 2.5 L15 9 L4 15.5 Z"/></svg>
+      <svg id="pauseIcon" width="20" height="20" viewBox="0 0 18 18" fill="currentColor" style="display:none"><rect x="3" y="2" width="4" height="14"/><rect x="11" y="2" width="4" height="14"/></svg>
+    </button>
+  </footer>
 
-      <div class="controls-row">
-        <button type="button" class="chip-btn" id="ambientToggle">
-          <span id="ambientIcon">&#9834;</span> background music: chalu
-        </button>
-        <button type="button" class="chip-btn" id="shareBtn">&#10697; share ye gaana</button>
-      </div>
-    </section>
-
-    <p class="disclaimer">gaana poora YouTube se hi bajta hai — artists aur labels ko utna hi milta hai jitna kisi normal view pe milta &middot; yeh fan-made rotation hai, official channel nahi &middot; <a id="removalLink" href="mailto:hello@katora.radio">gaana hatwana hai? bata do</a></p>
-
-    <a href="https://iampravo.vercel.app/" target="_blank" rel="noopener" class="signature">&#10022; crafted by iampravo</a>
-  </main>
+  <p class="disclaimer">gaana poora YouTube se hi bajta hai — artists aur labels ko utna hi milta hai jitna kisi normal view pe milta &middot; yeh fan-made rotation hai, official channel nahi &middot; <a id="removalLink" href="mailto:hello@katora.radio">gaana hatwana hai? bata do</a> &middot; <a href="https://iampravo.vercel.app/" target="_blank" rel="noopener">crafted by iampravo</a></p>
 
   <div id="ytPlayer" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0;"></div>
-  <audio id="ambientAudio" loop preload="auto"></audio>
+  <audio id="ambientAudio" loop preload="none"></audio>
   <canvas id="shareCanvas" width="1080" height="1080" style="display:none"></canvas>
 
   <script src="https://www.youtube.com/iframe_api"></script>
