@@ -18,8 +18,9 @@ const SCENES = {
 };
 
 // Real dashcam-style footage (not illustrated), cycled behind the truck
-// scene. Lazy-loaded — see scheduleGifStart — so it never competes with
-// the song being ready to play.
+// scene. Only starts once the song is actually playing — see
+// updateGifPlaybackState — so it never competes with the song becoming
+// playable.
 const TRUCK_GIFS = [
   'assets/gif/truck-1.gif',
   'assets/gif/truck-2.gif',
@@ -374,7 +375,7 @@ const ROTATIONS = {
 
 const SLOT_MINUTES = 4; // nominal per-song scheduling slot, used only to pick the live starting point
 const SONG_VOLUME = 60; // 0-100, YouTube player's own scale
-const AMBIENT_VOLUME = 0.4; // 0-1, HTMLMediaElement scale — audible under the song, not competing with it
+const AMBIENT_VOLUME = 0.7; // 0-1, HTMLMediaElement scale — audible under the song, not competing with it
 
 function istParts() {
   const fmt = new Intl.DateTimeFormat('en-US', {
@@ -397,6 +398,7 @@ let ytPlayer = null;
 let ytReady = false;
 let playerStarted = false;
 let pendingPlay = false; // true if the listener hit play before the YouTube API had finished loading
+let songIsPlaying = false; // ambient audio and the truck gif both follow this
 let ambientOn = false;
 let ambientLoadedScene = null;
 let isMuted = false;
@@ -425,6 +427,8 @@ const shareBtn = el('shareBtn');
 const bgScene = el('bgScene');
 const bgGif = el('bgGif');
 const clockEl = el('clock');
+const sleepBtn = el('sleepBtn');
+const sleepMenu = el('sleepMenu');
 
 let gifRotationTimer = null;
 let gifIndex = 0;
@@ -435,12 +439,7 @@ function setScene(sceneKey) {
   if (sceneKey === currentScene) return;
   currentScene = sceneKey;
   bgScene.className = `bg-scene scene-${sceneKey}`;
-
-  if (sceneKey === 'truck') {
-    scheduleGifStart();
-  } else {
-    stopGifRotation();
-  }
+  updateGifPlaybackState();
 
   // Background music is opt-in — only re-point/re-fetch the ambient track
   // if the listener already turned it on.
@@ -472,6 +471,11 @@ function resumeAmbientIfOn() {
 }
 
 // ---------- background gif rotation (real footage, lazy) ----------
+// Tied to song playback: the gif only rotates while the song is actually
+// playing. Pausing the song freezes it on a still frame (native GIFs have
+// no JS-controllable pause, so we swap to a static poster image instead);
+// leaving the truck scene entirely hides it. Resuming picks the same clip
+// back up rather than jumping to a different one.
 
 function showGif(src) {
   const img = new Image();
@@ -499,14 +503,23 @@ function stopGifRotation() {
   bgGif.classList.remove('loaded');
 }
 
-// Song-ready is the priority — the (heavier) real-footage background only
-// starts fetching once the browser is idle, or after a short fallback delay,
-// so it never competes with the YouTube player becoming playable.
-function scheduleGifStart() {
-  if (gifRotationTimer) return;
-  const start = () => { if (currentScene === 'truck') startTruckGifRotation(); };
-  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
-  else setTimeout(start, 400);
+function pauseGifRotation() {
+  if (!gifRotationTimer) return;
+  clearInterval(gifRotationTimer);
+  gifRotationTimer = null;
+  if (bgGif.classList.contains('loaded')) {
+    bgGif.src = TRUCK_GIFS[gifIndex].replace('.gif', '-poster.jpg');
+  }
+}
+
+function updateGifPlaybackState() {
+  if (currentScene !== 'truck') {
+    stopGifRotation();
+  } else if (songIsPlaying) {
+    if (!gifRotationTimer) startTruckGifRotation();
+  } else {
+    pauseGifRotation();
+  }
 }
 
 // ---------- clock (IST — matches the rotation schedule) ----------
@@ -596,7 +609,6 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
           loadSong(index, elapsedSeconds, true);
           setPlayingUI(true);
           startProgressLoop();
-          resumeAmbientIfOn();
         } else {
           loadSong(index, elapsedSeconds);
         }
@@ -614,6 +626,9 @@ function setPlayingUI(isPlaying) {
   playIcon.style.display = isPlaying ? 'none' : '';
   pauseIcon.style.display = isPlaying ? '' : 'none';
   playBtn.setAttribute('aria-label', isPlaying ? 'pause' : 'play');
+  songIsPlaying = isPlaying;
+  updateGifPlaybackState();
+  if (isPlaying) resumeAmbientIfOn(); else pauseAmbientIfOn();
 }
 
 function startProgressLoop() {
@@ -626,9 +641,9 @@ function startProgressLoop() {
   }, 500);
 }
 
-// Song playback is the first priority — pausing/resuming the song also
-// pauses/resumes background music (if the listener opted into it), so the
-// two layers never drift out of sync.
+// Song playback is the first priority — pausing/resuming it also pauses/
+// resumes background music and the truck gif (via setPlayingUI), so nothing
+// drifts out of sync.
 playBtn.addEventListener('click', () => {
   if (!ytReady) {
     // API isn't ready yet — remember the intent and show a loading state
@@ -643,13 +658,11 @@ playBtn.addEventListener('click', () => {
   if (isPlaying) {
     ytPlayer.pauseVideo();
     setPlayingUI(false);
-    pauseAmbientIfOn();
   } else {
     playerStarted = true;
     ytPlayer.playVideo();
     setPlayingUI(true);
     startProgressLoop();
-    resumeAmbientIfOn();
   }
 });
 
@@ -671,6 +684,53 @@ muteBtn.addEventListener('click', () => {
   mutedIcon.style.display = isMuted ? '' : 'none';
   muteBtn.classList.toggle('active', isMuted);
   muteBtn.title = isMuted ? 'unmute' : 'mute';
+});
+
+// ---------- sleep timer ----------
+// Pauses the song (which, via setPlayingUI, also pauses the ambient music
+// and freezes the gif) after the chosen number of minutes. Runs to
+// completion regardless of manual pauses/resumes in the meantime, same as
+// any music app's sleep timer.
+
+let sleepTimer = null;
+
+function clearSleepTimer() {
+  clearTimeout(sleepTimer);
+  sleepTimer = null;
+  sleepBtn.classList.remove('active');
+  sleepBtn.title = 'sleep timer: off';
+}
+
+function setSleepTimer(minutes) {
+  clearSleepTimer();
+  if (minutes <= 0) return;
+  sleepBtn.classList.add('active');
+  sleepBtn.title = `sleep timer: ${minutes} min`;
+  sleepTimer = setTimeout(() => {
+    if (ytReady && ytPlayer && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+      ytPlayer.pauseVideo();
+      setPlayingUI(false);
+    }
+    clearSleepTimer();
+  }, minutes * 60 * 1000);
+}
+
+sleepBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  sleepMenu.hidden = !sleepMenu.hidden;
+});
+
+sleepMenu.querySelectorAll('button').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    setSleepTimer(Number(btn.dataset.minutes));
+    sleepMenu.hidden = true;
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!sleepMenu.hidden && e.target !== sleepBtn && !sleepMenu.contains(e.target)) {
+    sleepMenu.hidden = true;
+  }
 });
 
 // ---------- background music (ambient layer, loaded only on request) ----------

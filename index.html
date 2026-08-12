@@ -7,7 +7,7 @@
 <meta name="description" content="90s Hindi songs, playing live — tuned to whatever time it is in India right now.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Yatra+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -59,6 +59,18 @@
         <svg id="volumeIcon" width="16" height="16" viewBox="0 0 18 18" fill="currentColor"><path d="M2 6h3l4-3.5v13L5 12H2z"/><path d="M11.5 5.5a4.5 4.5 0 010 7" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
         <svg id="mutedIcon" width="16" height="16" viewBox="0 0 18 18" fill="currentColor" style="display:none"><path d="M2 6h3l4-3.5v13L5 12H2z"/><line x1="11" y1="5.5" x2="16" y2="10.5" stroke="currentColor" stroke-width="1.4"/><line x1="16" y1="5.5" x2="11" y2="10.5" stroke="currentColor" stroke-width="1.4"/></svg>
       </button>
+      <div class="sleep-wrap">
+        <button type="button" class="knob-btn" id="sleepBtn" aria-label="sleep timer" title="sleep timer: off">
+          <svg width="15" height="15" viewBox="0 0 18 18" fill="currentColor"><path d="M13.5 10.5A6 6 0 017.2 3.8a6 6 0 108.3 8.3 6 6 0 01-2 -1.6z"/></svg>
+        </button>
+        <div class="sleep-menu" id="sleepMenu" hidden>
+          <button type="button" data-minutes="15">15 min</button>
+          <button type="button" data-minutes="30">30 min</button>
+          <button type="button" data-minutes="45">45 min</button>
+          <button type="button" data-minutes="60">60 min</button>
+          <button type="button" data-minutes="0" class="sleep-off">off</button>
+        </div>
+      </div>
     </div>
   </footer>
 

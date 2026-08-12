@@ -154,10 +154,10 @@ body {
 
 .wordmark {
   margin: 0;
-  font-family: 'Archivo Narrow', sans-serif;
-  font-weight: 700;
-  font-size: clamp(40px, 11vw, 88px);
-  letter-spacing: -0.01em;
+  font-family: 'Yatra One', 'Archivo Narrow', sans-serif;
+  font-weight: 400;
+  font-size: clamp(38px, 10.5vw, 82px);
+  letter-spacing: 0;
   text-shadow: 0 4px 30px rgba(0,0,0,0.55);
 }
 
@@ -309,6 +309,44 @@ body {
 .knob-btn:hover { color: var(--accent-strong); }
 .knob-btn.active { color: var(--accent-strong); background: radial-gradient(circle at 35% 30%, #5a4530, #2a1c10 72%); }
 .knob-btn.muted { color: rgba(244, 239, 230, 0.3); }
+
+/* ---------- sleep timer ---------- */
+
+.sleep-wrap { position: relative; }
+
+.sleep-menu {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: -6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(18, 14, 10, 0.92);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.sleep-menu button {
+  appearance: none;
+  border: none;
+  background: none;
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sleep-menu button:hover { background: rgba(217, 138, 61, 0.18); color: var(--accent-strong); }
+.sleep-menu button.sleep-off { color: var(--muted); border-top: 1px solid var(--border); margin-top: 2px; padding-top: 7px; }
 
 /* ---------- footer text ---------- */
 
