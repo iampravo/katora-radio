@@ -429,6 +429,7 @@ const bgGif = el('bgGif');
 const clockEl = el('clock');
 const sleepBtn = el('sleepBtn');
 const sleepMenu = el('sleepMenu');
+const sleepRemaining = el('sleepRemaining');
 
 let gifRotationTimer = null;
 let gifIndex = 0;
@@ -693,19 +694,39 @@ muteBtn.addEventListener('click', () => {
 // any music app's sleep timer.
 
 let sleepTimer = null;
+let sleepCountdownInterval = null;
+let sleepEndTime = null;
 
 function clearSleepTimer() {
   clearTimeout(sleepTimer);
+  clearInterval(sleepCountdownInterval);
   sleepTimer = null;
+  sleepCountdownInterval = null;
+  sleepEndTime = null;
   sleepBtn.classList.remove('active');
   sleepBtn.title = 'sleep timer: off';
+  sleepRemaining.hidden = true;
+  sleepRemaining.textContent = '';
+}
+
+function updateSleepCountdown() {
+  const remainingMs = sleepEndTime - Date.now();
+  if (remainingMs <= 0) return;
+  const totalSeconds = Math.ceil(remainingMs / 1000);
+  const mm = Math.floor(totalSeconds / 60);
+  const ss = totalSeconds % 60;
+  sleepRemaining.textContent = `${mm}:${String(ss).padStart(2, '0')}`;
 }
 
 function setSleepTimer(minutes) {
   clearSleepTimer();
   if (minutes <= 0) return;
+  sleepEndTime = Date.now() + minutes * 60 * 1000;
   sleepBtn.classList.add('active');
   sleepBtn.title = `sleep timer: ${minutes} min`;
+  sleepRemaining.hidden = false;
+  updateSleepCountdown();
+  sleepCountdownInterval = setInterval(updateSleepCountdown, 1000);
   sleepTimer = setTimeout(() => {
     if (ytReady && ytPlayer && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
       ytPlayer.pauseVideo();
