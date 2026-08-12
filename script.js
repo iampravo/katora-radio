@@ -390,7 +390,7 @@ function drawShareCard(song) {
 
   ctx.fillStyle = '#D98A3D';
   ctx.font = '600 34px "IBM Plex Mono", monospace';
-  ctx.fillText('POCKET RADIO', 64, 110);
+  ctx.fillText('MERA RADIO', 64, 110);
 
   ctx.fillStyle = 'rgba(244,239,230,0.6)';
   ctx.font = '500 24px "IBM Plex Mono", monospace';
@@ -414,7 +414,7 @@ function drawShareCard(song) {
 
   ctx.fillStyle = 'rgba(244,239,230,0.55)';
   ctx.font = '500 20px "IBM Plex Mono", monospace';
-  ctx.fillText('pocketradio.app', 64, h - 70);
+  ctx.fillText('meraradio.app', 64, h - 70);
 
   return canvas;
 }
@@ -447,7 +447,7 @@ shareBtn.addEventListener('click', () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'pocket-radio-now-playing.png';
+    a.download = 'mera-radio-now-playing.png';
     a.click();
     URL.revokeObjectURL(url);
     shareBtn.textContent = '✓';

@@ -1,6 +1,6 @@
-# pocket radio
+# मेरा रेडियो — mera radio
 
-Old songs, right in your pocket (पुराने गाने, आपकी जेब में) — a barbershop-and-highway radio for the internet, playing 90s Hindi songs live, tuned to whatever time it actually is in India right now. Same skeleton as [saloon.wtf](https://saloon.wtf) (corner clock, big centered wordmark, persistent bottom player bar), built on real content instead of illustration.
+Old songs, always with you — a barbershop-and-highway radio for the internet, playing 90s Hindi songs live, tuned to whatever time it actually is in India right now. Same skeleton as [saloon.wtf](https://saloon.wtf) (corner clock, big centered wordmark, persistent bottom player bar), built on real content instead of illustration.
 
 ## How it works
 
