@@ -330,6 +330,12 @@ body {
   z-index: 5;
 }
 
+/* the [hidden] attribute normally beats nothing, but our own .sleep-menu
+   rule above sets display:flex unconditionally, which — being an author
+   style — outranks the browser's default [hidden]{display:none} regardless
+   of specificity. Restate it explicitly so toggling `hidden` actually works. */
+.sleep-menu[hidden] { display: none; }
+
 .sleep-menu button {
   appearance: none;
   border: none;
