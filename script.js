@@ -215,20 +215,30 @@ function renderTrack(song) {
   trackMeta.textContent = `${song.film} · ${song.singers}`;
 }
 
-function loadSong(index, seekSeconds) {
+// cueVideoById only stages a video (no autoplay) — used for the very first
+// load, before the listener has pressed play. Once playback has actually
+// started, loadVideoById is used instead everywhere: it loads AND plays in
+// one call, avoiding the race of cueing a new video and then immediately
+// calling playVideo() on top of it, which is what made skipping tracks feel
+// laggy/inconsistent.
+function loadSong(index, seekSeconds, autoplay) {
   currentSongIndex = index;
   const song = currentRotationSongs[index];
   renderTrack(song);
-  if (ytReady && ytPlayer) {
-    ytPlayer.cueVideoById({ videoId: song.youtubeId, startSeconds: seekSeconds || 0 });
+  if (!ytReady || !ytPlayer) return;
+  const params = { videoId: song.youtubeId, startSeconds: seekSeconds || 0 };
+  if (autoplay) {
+    ytPlayer.loadVideoById(params);
+  } else {
+    ytPlayer.cueVideoById(params);
   }
 }
 
 function goToSong(delta) {
   const len = currentRotationSongs.length;
   const nextIndex = (currentSongIndex + delta + len) % len;
-  loadSong(nextIndex, 0);
-  if (playerStarted) ytPlayer.playVideo();
+  loadSong(nextIndex, 0, playerStarted);
+  if (playerStarted) setPlayingUI(true);
 }
 
 function advanceToNext() {
