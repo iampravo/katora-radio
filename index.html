@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>katora radio</title>
+<meta name="description" content="90s Hindi songs, playing live — a barbershop radio for the internet. Real video, real ambience, tuned to whatever hour it is right now.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <video class="bg-video" autoplay muted loop playsinline id="bgVideo" poster="assets/video/poster.jpg">
+    <source src="assets/video/barbershop-bg.webm" type="video/webm">
+    <source src="assets/video/barbershop-bg.mp4" type="video/mp4">
+  </video>
+  <div class="bg-overlay"></div>
+
+  <main class="page">
+    <header class="header">
+      <div class="wordmark">katora radio</div>
+      <div class="tagline">90s hindi, playing live</div>
+    </header>
+
+    <section class="console">
+      <div class="rotation-label" id="rotationLabel">MORNING ROTATION</div>
+
+      <div class="now-playing">
+        <img class="art" id="trackArt" alt="" width="72" height="72">
+        <div class="track-info">
+          <div class="track-title" id="trackTitle">tuning in&hellip;</div>
+          <div class="track-meta" id="trackMeta">&nbsp;</div>
+        </div>
+        <button type="button" class="play-btn" id="playBtn" aria-label="play">
+          <svg id="playIcon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M4 2.5 L15 9 L4 15.5 Z"/></svg>
+          <svg id="pauseIcon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" style="display:none"><rect x="3" y="2" width="4" height="14"/><rect x="11" y="2" width="4" height="14"/></svg>
+        </button>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="controls-row">
+        <button type="button" class="chip-btn" id="ambientToggle">
+          <span id="ambientIcon">&#9834;</span> street noise: on
+        </button>
+        <button type="button" class="chip-btn" id="shareBtn">&#10697; share now playing</button>
+      </div>
+    </section>
+
+    <p class="disclaimer">everything plays through YouTube, so the artists and labels get paid the same as any other view · this is a fan-made rotation, not an official channel · <a id="removalLink" href="mailto:hello@katora.radio">flag a track</a></p>
+
+    <a href="https://iampravo.vercel.app/" target="_blank" rel="noopener" class="signature">&#10022; crafted by iampravo</a>
+  </main>
+
+  <div id="ytPlayer" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0;"></div>
+  <audio id="ambientAudio" src="assets/audio/ambience-chatter.mp3" loop preload="auto"></audio>
+  <canvas id="shareCanvas" width="1080" height="1080" style="display:none"></canvas>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
