@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>katora radio</title>
-<meta name="description" content="90s Hindi songs, playing live — a barbershop radio for the internet. Real video, real ambience, tuned to whatever hour it is right now.">
+<meta name="description" content="90s Hindi gaane, playing live — real video, real mahaul, tuned to whatever time it is in India right now.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,25 +12,22 @@
 </head>
 <body>
 
-  <video class="bg-video" autoplay muted loop playsinline id="bgVideo" poster="assets/video/poster.jpg">
-    <source src="assets/video/barbershop-bg.webm" type="video/webm">
-    <source src="assets/video/barbershop-bg.mp4" type="video/mp4">
-  </video>
+  <video class="bg-video" autoplay muted loop playsinline id="bgVideo"></video>
   <div class="bg-overlay"></div>
 
   <main class="page">
     <header class="header">
       <div class="wordmark">katora radio</div>
-      <div class="tagline">90s hindi, playing live</div>
+      <div class="tagline">purane gaane, poora vibe</div>
     </header>
 
     <section class="console">
-      <div class="rotation-label" id="rotationLabel">MORNING ROTATION</div>
+      <div class="rotation-label" id="rotationLabel">SUBAH KA ROTATION</div>
 
       <div class="now-playing">
         <img class="art" id="trackArt" alt="" width="72" height="72">
         <div class="track-info">
-          <div class="track-title" id="trackTitle">tuning in&hellip;</div>
+          <div class="track-title" id="trackTitle">gaana aa raha hai&hellip;</div>
           <div class="track-meta" id="trackMeta">&nbsp;</div>
         </div>
         <button type="button" class="play-btn" id="playBtn" aria-label="play">
@@ -45,19 +42,19 @@
 
       <div class="controls-row">
         <button type="button" class="chip-btn" id="ambientToggle">
-          <span id="ambientIcon">&#9834;</span> street noise: on
+          <span id="ambientIcon">&#9834;</span> background music: chalu
         </button>
-        <button type="button" class="chip-btn" id="shareBtn">&#10697; share now playing</button>
+        <button type="button" class="chip-btn" id="shareBtn">&#10697; share ye gaana</button>
       </div>
     </section>
 
-    <p class="disclaimer">everything plays through YouTube, so the artists and labels get paid the same as any other view · this is a fan-made rotation, not an official channel · <a id="removalLink" href="mailto:hello@katora.radio">flag a track</a></p>
+    <p class="disclaimer">gaana poora YouTube se hi bajta hai — artists aur labels ko utna hi milta hai jitna kisi normal view pe milta &middot; yeh fan-made rotation hai, official channel nahi &middot; <a id="removalLink" href="mailto:hello@katora.radio">gaana hatwana hai? bata do</a></p>
 
     <a href="https://iampravo.vercel.app/" target="_blank" rel="noopener" class="signature">&#10022; crafted by iampravo</a>
   </main>
 
   <div id="ytPlayer" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0;"></div>
-  <audio id="ambientAudio" src="assets/audio/ambience-chatter.mp3" loop preload="auto"></audio>
+  <audio id="ambientAudio" loop preload="auto"></audio>
   <canvas id="shareCanvas" width="1080" height="1080" style="display:none"></canvas>
 
   <script src="https://www.youtube.com/iframe_api"></script>

@@ -4,9 +4,25 @@
 // Each song's youtubeId is a verified, real upload (checked before adding).
 // Playback runs entirely through YouTube's own embedded player — see disclaimer in index.html.
 
+// Two visual/audio scenes, matched to the mood of each time-of-day rotation —
+// barber-shop mornings, highway-trucker evenings and nights.
+const SCENES = {
+  barber: {
+    video: 'assets/video/barber-india-bg',
+    poster: 'assets/video/barber-india-poster.jpg',
+    ambient: 'assets/audio/ambience-chatter.mp3',
+  },
+  truck: {
+    video: 'assets/video/truck-bg',
+    poster: 'assets/video/truck-poster.jpg',
+    ambient: 'assets/audio/highway-ambience.mp3',
+  },
+};
+
 const ROTATIONS = {
   morning: {
-    label: 'Morning Rotation',
+    label: 'Subah ka Rotation',
+    scene: 'barber',
     songs: [
       { title: 'Pehla Nasha', film: 'Jo Jeeta Wohi Sikandar (1992)', singers: 'Udit Narayan, Sadhana Sargam', youtubeId: 'Whe-8N0F0oQ' },
       { title: 'Mera Dil Bhi Kitna Pagal Hai', film: 'Saajan (1991)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: '9XOLDuaYEmo' },
@@ -15,7 +31,8 @@ const ROTATIONS = {
     ],
   },
   afternoon: {
-    label: 'Afternoon Rotation',
+    label: 'Dopahar ka Rotation',
+    scene: 'barber',
     songs: [
       { title: 'Tu Cheez Badi Hai Mast Mast', film: 'Mohra (1994)', singers: 'Udit Narayan, Kavita Krishnamurthy', youtubeId: 'DHWVkvhQB3U' },
       { title: 'Tip Tip Barsa Paani', film: 'Mohra (1994)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'HyKuXycQXkg' },
@@ -23,7 +40,8 @@ const ROTATIONS = {
     ],
   },
   evening: {
-    label: 'Evening Rotation',
+    label: 'Shaam ka Rotation',
+    scene: 'truck',
     songs: [
       { title: 'Didi Tera Devar Deewana', film: 'Hum Aapke Hain Koun (1994)', singers: 'Lata Mangeshkar, S. P. Balasubrahmanyam', youtubeId: 'SnPbVSvdlko' },
       { title: 'Kuch Kuch Hota Hai', film: 'Kuch Kuch Hota Hai (1998)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'xnGcDsNu5DA' },
@@ -31,7 +49,8 @@ const ROTATIONS = {
     ],
   },
   night: {
-    label: 'Late Night Rotation',
+    label: 'Raat ka Rotation',
+    scene: 'truck',
     songs: [
       { title: 'Sandese Aate Hai', film: 'Border (1997)', singers: 'Sonu Nigam, Roop Kumar Rathod', youtubeId: 'cgsCsXIzzBY' },
       { title: 'Mera Dil Bhi Kitna Pagal Hai', film: 'Saajan (1991)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: '9XOLDuaYEmo' },
@@ -65,6 +84,7 @@ let playerStarted = false;
 let ambientOn = true;
 let currentRotationSongs = [];
 let currentSongIndex = 0;
+let currentScene = null;
 let progressTimer = null;
 
 const el = (id) => document.getElementById(id);
@@ -79,6 +99,28 @@ const progressFill = el('progressFill');
 const ambientToggle = el('ambientToggle');
 const ambientAudio = el('ambientAudio');
 const shareBtn = el('shareBtn');
+const bgVideo = el('bgVideo');
+
+// ---------- scene (video + ambient) ----------
+
+function applyScene(sceneKey) {
+  if (sceneKey === currentScene) return;
+  currentScene = sceneKey;
+  const scene = SCENES[sceneKey];
+
+  bgVideo.poster = scene.poster;
+  bgVideo.innerHTML = `
+    <source src="${scene.video}.webm" type="video/webm">
+    <source src="${scene.video}.mp4" type="video/mp4">
+  `;
+  bgVideo.load();
+  bgVideo.play().catch(() => {});
+
+  const wasPlaying = ambientOn && playerStarted && !ambientAudio.paused;
+  ambientAudio.src = scene.ambient;
+  ambientAudio.load();
+  if (wasPlaying) ambientAudio.play().catch(() => {});
+}
 
 // ---------- rotation / scheduling ----------
 
@@ -118,6 +160,7 @@ function refreshRotationIfChanged() {
   const { key, rotation } = pickLiveStart();
   rotationLabel.textContent = rotation.label.toUpperCase();
   currentRotationSongs = rotation.songs;
+  applyScene(rotation.scene);
   return key;
 }
 
@@ -133,6 +176,7 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
         const { rotation, index, elapsedSeconds } = pickLiveStart();
         currentRotationSongs = rotation.songs;
         rotationLabel.textContent = rotation.label.toUpperCase();
+        applyScene(rotation.scene);
         loadSong(index, elapsedSeconds);
       },
       onStateChange: (e) => {
@@ -178,10 +222,10 @@ playBtn.addEventListener('click', () => {
   }
 });
 
-// ---------- ambient street noise ----------
+// ---------- background music (ambient layer under the songs) ----------
 
 function updateAmbientButtonLabel() {
-  ambientToggle.innerHTML = `<span>&#9834;</span> street noise: ${ambientOn ? 'on' : 'off'}`;
+  ambientToggle.innerHTML = `<span>&#9834;</span> background music: ${ambientOn ? 'chalu' : 'band'}`;
   ambientToggle.classList.toggle('muted', !ambientOn);
 }
 
@@ -236,7 +280,7 @@ function drawShareCard(song) {
 
   ctx.fillStyle = 'rgba(244,239,230,0.6)';
   ctx.font = '500 24px "IBM Plex Mono", monospace';
-  ctx.fillText('NOW PLAYING', 64, 400);
+  ctx.fillText('ABHI CHAL RAHA HAI', 64, 400);
 
   ctx.fillStyle = '#F4EFE6';
   ctx.font = '600 56px "Archivo Narrow", sans-serif';
