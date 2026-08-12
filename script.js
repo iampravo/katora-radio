@@ -26,6 +26,12 @@ const TRUCK_GIFS = [
   'assets/gif/truck-3.gif',
   'assets/gif/truck-4.gif',
   'assets/gif/truck-5.gif',
+  'assets/gif/truck-6.gif',
+  'assets/gif/truck-7.gif',
+  'assets/gif/truck-8.gif',
+  'assets/gif/truck-9.gif',
+  'assets/gif/truck-10.gif',
+  'assets/gif/truck-11.gif',
 ];
 const GIF_ROTATE_MS = 25000;
 
