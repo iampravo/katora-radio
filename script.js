@@ -157,23 +157,218 @@ const ROTATIONS = {
     label: 'Evening Rotation',
     scene: 'truck',
     songs: [
-      { title: 'Didi Tera Devar Deewana', film: 'Hum Aapke Hain Koun (1994)', singers: 'Lata Mangeshkar, S. P. Balasubrahmanyam', youtubeId: 'SnPbVSvdlko' },
-      { title: 'Kuch Kuch Hota Hai', film: 'Kuch Kuch Hota Hai (1998)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'xnGcDsNu5DA' },
-      { title: 'Chaiyya Chaiyya', film: 'Dil Se (1998)', singers: 'Sukhwinder Singh, Sapna Awasthi', youtubeId: 'APo73rlxWaE' },
+      { title: 'Chaiyya Chaiyya', film: 'Dil Se (1998)', singers: 'Sukhwinder Singh, Sapna Awasthi', youtubeId: '9MX-QejdVaQ' },
+      { title: 'I Love My India', film: 'Pardes (1997)', singers: 'Hariharan, S.P. Balasubrahmanyam, Kavita Krishnamurthy', youtubeId: 'VHQ0w-9ITBI' },
+      { title: 'Udja Kale Kawan', film: 'Gadar: Ek Prem Katha (2001)', singers: 'Udit Narayan', youtubeId: 'YJ70xDuUlt8' },
+      { title: 'Main Nikla Gaddi Leke', film: 'Gadar: Ek Prem Katha (2001)', singers: 'Udit Narayan', youtubeId: 'IJNR_UVLDhs' },
+      { title: 'Ye Jo Desh Hai Tera', film: 'Swades (2004)', singers: 'Udit Narayan', youtubeId: 'i7hVzQTCF-o' },
+      { title: 'Yun Hi Chala Chal', film: 'Swades (2004)', singers: 'Udit Narayan, Kailash Kher', youtubeId: 'eEeX2QMlSlo' },
+      { title: 'Panchhi Nadiya Pawan Ke', film: 'Refugee (2000)', singers: 'Alka Yagnik, Udit Narayan', youtubeId: 'FVBgbuw6j14' },
+      { title: 'Jiya Jale', film: 'Dil Se (1998)', singers: 'Lata Mangeshkar, Sukhwinder Singh', youtubeId: 'M-2nlaOQQSQ' },
+      { title: 'Roja Jaaneman', film: 'Roja (1992)', singers: 'S.P. Balasubrahmanyam, K.S. Chithra', youtubeId: 'iDQ1qjCevZE' },
+      { title: 'Dil Hai Chota Sa', film: 'Roja (1992)', singers: 'K.S. Chithra', youtubeId: 'P2s1Cl23oik' },
+      { title: 'Bharat Humko Jaan Se Pyara Hai', film: 'Roja (1992)', singers: 'Hariharan', youtubeId: '7q5DUIgLs_4' },
+      { title: 'Yeh Safar Bahut Hai Kathin', film: '1942: A Love Story (1994)', singers: 'Shibaji Chatterjee', youtubeId: 'O3CRcu0LMGQ' },
+      { title: 'Yaara Seeli Seeli', film: 'Lekin... (1990)', singers: 'Lata Mangeshkar', youtubeId: 'OCEXAUUA5ss' },
+      { title: 'Tanha Tanha', film: 'Rangeela (1995)', singers: 'Asha Bhosle', youtubeId: 'W1GNGlaFKYw' },
+      { title: 'Jeeta Tha Jiske Liye', film: 'Dilwale (1994)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'fa5Yzxdh8e4' },
+      { title: 'Woh Ladki Bahut Yaad Aati Hai', film: 'Qayamat (2003)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'B-gFmSHCTmk' },
+      { title: 'Accha Sila Diya Tune Mere Pyar Ka', film: 'Bewafa Sanam (1995)', singers: 'Sonu Nigam, Anuradha Paudwal', youtubeId: 'G7AdjVDBLO8' },
+      { title: 'Sab Kuch Bhula Diya', film: 'Hum Tumhare Hain Sanam (2002)', singers: 'Sonu Nigam, Sapna Awasthi', youtubeId: 'xKx_80QM2LU' },
+      { title: 'Mubarak Ho Tumko Yeh Shaadi Tumhari', film: 'Haan Maine Bhi Pyaar Kiya (2002)', singers: 'Udit Narayan', youtubeId: 'BIX8Dfa05lQ' },
+      { title: 'Dulhe Ka Sehra', film: 'Dhadkan (2000)', singers: 'Udit Narayan', youtubeId: 'iZAv9zDeFSc' },
+      { title: 'Aisa Des Hai Mera', film: 'Veer-Zaara (2004)', singers: 'Udit Narayan, Sonu Nigam, Gurdas Maan, Sukhwinder Singh', youtubeId: 'wDheWYmNEhQ' },
+      { title: 'Yeh Hum Aa Gaye Hain Kahan', film: 'Veer-Zaara (2004)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'ZmZOT9IbaaM' },
+      { title: 'Chhod Aaye Hum Woh Galiyan', film: 'Maachis (1996)', singers: 'Hariharan', youtubeId: 'RraeHart9uY' },
+      { title: 'Chappa Chappa Charkha Chale', film: 'Maachis (1996)', singers: 'Jaspinder Narula, Suresh Wadkar', youtubeId: 'HVa0owi2ZP4' },
+      { title: 'Yaadein Yaad Aati Hai', film: 'Yaadein (2001)', singers: 'Hariharan', youtubeId: 'inXmWALwO8Q' },
+      { title: 'Piya Haji Ali', film: 'Fiza (2000)', singers: 'A.R. Rahman, Murtuza and Qadir Ali Khan', youtubeId: 'c4uYjMpE1l8' },
+      { title: 'Main Toh Raste Se Ja Raha Tha', film: 'Coolie No. 1 (1995)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'ekPjEpWKk74' },
+      { title: 'Gaya Gaya Dil', film: 'Fiza (2000)', singers: 'Sonu Nigam', youtubeId: 'NJjN8ElKmpo' },
+      { title: 'Na Leke Jao', film: 'Fiza (2000)', singers: 'Jaspinder Narula', youtubeId: 'W6mNLLOevZ4' },
+      { title: 'Tu Fiza Hai', film: 'Fiza (2000)', singers: 'Sonu Nigam, Alka Yagnik', youtubeId: 'Lrkdg5JVG8M' },
+      { title: 'Mere Dushman', film: 'Border (1997)', singers: 'Hariharan', youtubeId: 'Z8WsQl8kp2M' },
+      { title: 'Sathiya Tune Kya Kiya', film: 'Love (1991)', singers: 'S.P. Balasubrahmanyam, K.S. Chithra', youtubeId: '9J_isuHe8bw' },
+      { title: 'Dil Cheer Ke Dekh', film: 'Rang (1993)', singers: 'Kumar Sanu', youtubeId: '9f6GhUb-WdM' },
+      { title: 'Kitna Haseen Chehra', film: 'Dilwale (1994)', singers: 'Kumar Sanu', youtubeId: 'cakb1SD-vXM' },
+      { title: 'Saato Janam Main Tere', film: 'Dilwale (1994)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'f0oiheLlFW4' },
+      { title: 'Mauka Milega Toh Hum Bata Denge', film: 'Dilwale (1994)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: '78CN-Fx7oNo' },
+      { title: 'Hamen Jab Se Mohabbat', film: 'Border (1997)', singers: 'Sonu Nigam, Alka Yagnik', youtubeId: 'jor_SaUzuVI' },
+      { title: 'Musafir Jaane Wale', film: 'Gadar: Ek Prem Katha (2001)', singers: 'Udit Narayan, Preeti Uttam', youtubeId: '9HDtZvtg0VI' },
+      { title: 'Aan Milo Sajna', film: 'Gadar: Ek Prem Katha (2001)', singers: 'Ajoy Chakraborty, Parveen Sultana', youtubeId: 'Bx3izRX7bsk' },
+      { title: 'Meri Mehbooba', film: 'Pardes (1997)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'WkfcHsPKwds' },
+      { title: 'Nahin Hona Tha', film: 'Pardes (1997)', singers: 'Alka Yagnik, Udit Narayan', youtubeId: 'TUXD7fG8AVo' },
+      { title: 'Jahan Piya Wahan Main', film: 'Pardes (1997)', singers: 'K.S. Chithra, Shankar Mahadevan', youtubeId: '8ZBbCxbd3lw' },
+      { title: 'Hum To Bhai Jaise Hain', film: 'Veer-Zaara (2004)', singers: 'Lata Mangeshkar', youtubeId: 'c_L5nSf91zs' },
+      { title: 'Jaane Kyon', film: 'Veer-Zaara (2004)', singers: 'Lata Mangeshkar', youtubeId: 'LmMKyhuMyzk' },
+      { title: 'Lodi', film: 'Veer-Zaara (2004)', singers: 'Udit Narayan, Lata Mangeshkar, Gurdas Maan', youtubeId: 'BQE3BPCeuQU' },
+      { title: 'Main Yahaan Hoon', film: 'Veer-Zaara (2004)', singers: 'Udit Narayan', youtubeId: 'm6Y8xEfyXTs' },
+      { title: 'Tum Paas Aa Rahe Ho', film: 'Veer-Zaara (2004)', singers: 'Jagjit Singh, Lata Mangeshkar', youtubeId: 'a71FdsMOKOQ' },
+      { title: 'Ho Nahin Sakta', film: 'Diljale (1996)', singers: 'Udit Narayan', youtubeId: '4_a0ge-TPJs' },
+      { title: 'Shaam Hai Dhuan Dhuan', film: 'Diljale (1996)', singers: 'Poornima, Ajay Devgn', youtubeId: 'DliA0vtoyhk' },
+      { title: 'Jiske Aane Se', film: 'Diljale (1996)', singers: 'Kumar Sanu', youtubeId: 'Dp1tvWVNI-s' },
+      { title: 'Milne Ki Tum Koshish Karna', film: 'Dil Ka Kya Kasoor (1994)', singers: 'Kumar Sanu, Asha Bhosle', youtubeId: '_f9kIjhuYMo' },
+      { title: 'Mera Mulk Mera Desh (Sad)', film: 'Diljale (1996)', singers: 'Kavita Krishnamurthy', youtubeId: 'PSpcTFYMNGk' },
+      { title: 'Mera Rang De Basanti Chola', film: 'The Legend of Bhagat Singh (2002)', singers: 'Sonu Nigam', youtubeId: 'esV069YrVh4' },
+      { title: 'Sarfaroshi Ki Tamanna', film: 'The Legend of Bhagat Singh (2002)', singers: 'Hariharan, Sonu Nigam', youtubeId: 'MxWz46Fm_J8' },
+      { title: 'Pagdi Sambhal Jatta', film: 'The Legend of Bhagat Singh (2002)', singers: 'Sukhwinder Singh', youtubeId: 'U_Pf1FHKnJM' },
+      { title: 'Is Mitti Ka Karz Tha Mujhpe', film: 'China Gate (1998)', singers: 'Sonu Nigam', youtubeId: 'm7erYEj1n6E' },
+      { title: 'Hum Yahan', film: 'Zakhm (1998)', singers: 'Kumar Sanu', youtubeId: 'KkhmoE-MG8U' },
+      { title: 'Pardesi Maine Mohabbat Kar Li', film: 'Kahin Pyaar Na Ho Jaaye (2000)', singers: 'Sonu Nigam, Alka Yagnik', youtubeId: 'pRhOdXvQcK0' },
+      { title: 'Kahin Pyaar Na Ho Jaaye', film: 'Kahin Pyaar Na Ho Jaaye (2000)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'HUBHg1Wwbis' },
+      { title: 'Humko Toh Rehna Hai', film: 'China Gate (1998)', singers: 'Sonu Nigam, Sudesh Bhosle', youtubeId: 'GRMRB0romKs' },
+      { title: 'Zamane Ke Dekhe Hai Rang Hazar', film: 'Sadak (1991)', singers: 'Anuradha Paudwal', youtubeId: 'lZvFfksoAao' },
+      { title: 'Jab Jab Pyar Pe Phera Hua Hai', film: 'Sadak (1991)', singers: 'Kumar Sanu, Anuradha Paudwal', youtubeId: 'k6hlV0iUhRo' },
+      { title: 'Mohabbat Ki Hai Tumhare Liye', film: 'Sadak (1991)', singers: 'Kumar Sanu, Anuradha Paudwal', youtubeId: 'XEgihe0g8bM' },
+      { title: 'Baadalon Mein Chhup Raha Hai', film: 'Phir Teri Kahani Yaad Aayee (1993)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'AzN4PKgPg-4' },
+      { title: 'Shaairana Si Hai Zindagi', film: 'Phir Teri Kahani Yaad Aayee (1993)', singers: 'Alka Yagnik', youtubeId: 'QDKkI7AyAXg' },
+      { title: 'Ae Kaash Ke Hum', film: 'Kabhi Haan Kabhi Naa (1996)', singers: 'Kumar Sanu', youtubeId: 'Jtg2zyS_y_c' },
+      { title: 'Kuchh Na Kaho', film: '1942: A Love Story (1994)', singers: 'Kumar Sanu, Lata Mangeshkar', youtubeId: 'Kidtrrn4aUM' },
+      { title: 'Pyar Hua Chupke Se', film: '1942: A Love Story (1994)', singers: 'Kavita Krishnamurthy', youtubeId: 'V0FsE0b7Z-s' },
+      { title: 'Rim Jhim Rim Jhim', film: '1942: A Love Story (1994)', singers: 'Kumar Sanu, Kavita Krishnamurthy', youtubeId: 'GRikmrj8VN4' },
+      { title: 'Mera Dil Bhi Kitna Pagal Hai', film: 'Saajan (1991)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'RVQsBlI35vw' },
+      { title: 'Dekha Hai Pehli Baar', film: 'Saajan (1991)', singers: 'S.P. Balasubrahmanyam, Alka Yagnik', youtubeId: 'bBjVLCAAM1A' },
+      { title: 'Bahut Pyar Karte Hain', film: 'Saajan (1991)', singers: 'S.P. Balasubrahmanyam, Anuradha Paudwal', youtubeId: 'iupGwQqjgOk' },
+      { title: 'Jiye To Jiye Kaise', film: 'Saajan (1991)', singers: 'Pankaj Udhas', youtubeId: 'XOxz0Hr3Hzo' },
+      { title: 'Mere Khwabon Mein Jo Aaye', film: 'Dilwale Dulhania Le Jayenge (1995)', singers: 'Lata Mangeshkar', youtubeId: 's1LozokQjIg' },
+      { title: 'Ruk Ja O Dil Deewane', film: 'Dilwale Dulhania Le Jayenge (1995)', singers: 'Udit Narayan', youtubeId: 'jBpRItrod-Q' },
+      { title: 'Ho Gaya Hai Tujhko Toh Pyar Sajna', film: 'Dilwale Dulhania Le Jayenge (1995)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'hw_HpTI_Wkw' },
+      { title: 'Zara Sa Jhoom Loon Main', film: 'Dilwale Dulhania Le Jayenge (1995)', singers: 'Asha Bhosle, Abhijeet', youtubeId: '96YVQBjrtWE' },
+      { title: 'Na Tum Jaano Na Hum', film: 'Kaho Naa... Pyaar Hai (2000)', singers: 'Lucky Ali', youtubeId: 'eSxo4l-epv8' },
+      { title: 'Dil Ne Yeh Kaha Hai Dil Se', film: 'Dhadkan (2000)', singers: 'Alka Yagnik, Sonu Nigam', youtubeId: 'MvcNeQlqtes' },
+      { title: 'Tum Dil Ki Dhadkan Mein', film: 'Dhadkan (2000)', singers: 'Abhijeet, Alka Yagnik', youtubeId: '3Z_x7vBqr6E' },
+      { title: 'Dil To Pagal Hai', film: 'Dil To Pagal Hai (1997)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'lZ2PhyBF3GQ' },
+      { title: 'Bholi Si Surat', film: 'Dil To Pagal Hai (1997)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'IsPOtygII-Q' },
+      { title: 'Are Re Are', film: 'Dil To Pagal Hai (1997)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'OEpFiDKqH7E' },
+      { title: 'Chand Chhupa Badal Mein', film: 'Hum Dil De Chuke Sanam (1999)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: '9a6UaCBEV6o' },
+      { title: 'Albela Sajan', film: 'Hum Dil De Chuke Sanam (1999)', singers: 'Kavita Krishnamurthy, Vinod Rathod, Sujata Trivedi', youtubeId: 'MCXQXuKpgKE' },
+      { title: 'Sochenge Tumhe Pyar Karke', film: 'Deewana (1992)', singers: 'Kumar Sanu', youtubeId: 'lFdSi01tpYM' },
+      { title: 'Tumse Milke Dil Ka Jo Haal', film: 'Main Hoon Na (2004)', singers: 'Sonu Nigam, Alka Yagnik', youtubeId: 'mXkbWKr5ovU' },
+      { title: 'Chale Jaise Hawaein', film: 'Main Hoon Na (2004)', singers: 'KK, Vasundhara Das', youtubeId: 'UJ-MT8ZnUxY' },
+      { title: 'Sooraj Hua Maddham', film: 'Kabhi Khushi Kabhie Gham (2001)', singers: 'Sonu Nigam, Alka Yagnik', youtubeId: 'L0zKs8i7Nc8' },
+      { title: 'Har Dil Jo Pyar Karega', film: 'Har Dil Jo Pyar Karega (2000)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'V0jFYD0PirU' },
+      { title: 'Bin Tere Sanam', film: 'Yaara Dildara (1991)', singers: 'Udit Narayan, Kavita Krishnamurthy', youtubeId: 'POkRQw1VbcU' },
+      { title: 'Aa Ab Laut Chalen', film: 'Aa Ab Laut Chalen (1999)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: '6B_4AKG-pDo' },
+      { title: 'Yeh Raaste Hai Pyaar Ke', film: 'Yeh Raaste Hain Pyaar Ke (2001)', singers: 'Shaan, Jaspinder Narula', youtubeId: 'Qe-9Xqxes9o' },
+      { title: 'Kahin Aag Lage', film: 'Taal (1999)', singers: 'Asha Bhosle', youtubeId: '-qlrEgMX7pE' },
+      { title: 'Nahin Saamne', film: 'Taal (1999)', singers: 'Hariharan, Sukhwinder Singh', youtubeId: '0JlcMt3l3dY' },
+      { title: 'Ramta Jogi', film: 'Taal (1999)', singers: 'Sukhwinder Singh, Alka Yagnik', youtubeId: 'onfy6y07ujQ' },
+      { title: 'Suno Na', film: 'Jhankaar Beats (2003)', singers: 'Shaan', youtubeId: 'rEpfftr_Zgg' },
+      { title: 'Aye Dil Laya Hai Bahaar', film: 'Kya Kehna (2000)', singers: 'Kavita Krishnamurthy, Hariharan', youtubeId: '3wGPjDTqJxI' },
+      { title: 'Yeh Tara Woh Tara', film: 'Swades (2004)', singers: 'Udit Narayan', youtubeId: '9UzvpM3IwwY' },
     ],
   },
   night: {
     label: 'Late Night Rotation',
     scene: 'truck',
     songs: [
-      { title: 'Sandese Aate Hai', film: 'Border (1997)', singers: 'Sonu Nigam, Roop Kumar Rathod', youtubeId: 'cgsCsXIzzBY' },
-      { title: 'Mera Dil Bhi Kitna Pagal Hai', film: 'Saajan (1991)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: '9XOLDuaYEmo' },
-      { title: 'Pehla Nasha', film: 'Jo Jeeta Wohi Sikandar (1992)', singers: 'Udit Narayan, Sadhana Sargam', youtubeId: 'Whe-8N0F0oQ' },
+      { title: 'O Re Chhori', film: 'Lagaan (2001)', singers: 'Alka Yagnik, Udit Narayan', youtubeId: '3PIKesjmQTs' },
+      { title: 'Zara Zara', film: 'Rehnaa Hai Terre Dil Mein (2001)', singers: 'Bombay Jayashri', youtubeId: 'a71xD6RyOok' },
+      { title: 'Maahi Ve', film: 'Kal Ho Naa Ho (2003)', singers: 'Sonu Nigam, Shreya Ghoshal, Vasundhara Das', youtubeId: '1BWdglekty0' },
+      { title: 'Kal Ho Naa Ho', film: 'Kal Ho Naa Ho (2003)', singers: 'Sonu Nigam, Alka Yagnik, Shaan', youtubeId: 'g0eO74UmRBs' },
+      { title: 'Satrangi Re', film: 'Dil Se (1998)', singers: 'Sonu Nigam, Kavita Krishnamurthy', youtubeId: 'OClXVLsI4jM' },
+      { title: 'Dil Se Re', film: 'Dil Se (1998)', singers: 'A.R. Rahman', youtubeId: 'MYfaX0BH2AY' },
+      { title: 'Ae Ajnabi', film: 'Dil Se (1998)', singers: 'Udit Narayan', youtubeId: 'TdUu05Svkl8' },
+      { title: 'Neend Churayee Meri', film: 'Ishq (1997)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'gCcGXy_Mv8g' },
+      { title: 'Woh Lamhe', film: 'Zeher (2005)', singers: 'KK', youtubeId: 'mX0_1yejIQI' },
+      { title: 'Do Pal', film: 'Veer-Zaara (2004)', singers: 'Sonu Nigam, Lata Mangeshkar', youtubeId: 'HPsxxBhv9kc' },
+      { title: 'Tere Liye', film: 'Veer-Zaara (2004)', singers: 'Lata Mangeshkar, Roop Kumar Rathod', youtubeId: 'jo6iAkSoraY' },
+      { title: 'Kyun Hawa', film: 'Veer-Zaara (2004)', singers: 'Sonu Nigam, Lata Mangeshkar', youtubeId: 'rIx3YkMmX9Y' },
+      { title: 'Piyu Bole', film: 'Parineeta (2005)', singers: 'Shreya Ghoshal, Sonu Nigam', youtubeId: 'ZAkr0KFFLLs' },
+      { title: 'Tu Hi Re', film: 'Bombay (1995)', singers: 'K.S. Chithra, Hariharan', youtubeId: 'V9mN0qBgEzQ' },
+      { title: 'Kabhi Toh Nazar Milao', film: 'Baazigar (1993)', singers: 'Asha Bhosle, Adnan Sami', youtubeId: '84k0Dk1xAdg' },
+      { title: 'Tere Naam Humne Kiya Hai Zindagi', film: 'Tere Naam (2003)', singers: 'Udit Narayan', youtubeId: 'OMoU0Pfibc4' },
+      { title: 'Ye Silsila Hai Pyar Ka', film: 'Silsila Hai Pyar Ka (1999)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'BImdJ6eqj_w' },
+      { title: 'Yeh Dil Sun Raha Hai', film: 'Khamoshi: The Musical (1996)', singers: 'Kavita Krishnamurthy', youtubeId: '2gZmDKzsp_I' },
+      { title: 'O Priya O Priya', film: 'Kahin Pyaar Na Ho Jaaye (2000)', singers: 'Kamal Khan, Kumar Sanu, Alka Yagnik', youtubeId: '5KPzQPOenMY' },
+      { title: 'Saanwariya Re O Saanwariya', film: 'Kahin Pyaar Na Ho Jaaye (2000)', singers: 'Kamal Khan, Alka Yagnik', youtubeId: 'NnlleB27ks8' },
+      { title: 'Chaha Hai Tujhko', film: 'Mann (1999)', singers: 'Udit Narayan, Anuradha Paudwal', youtubeId: 'SUnD-B1JQZk' },
+      { title: 'Mann Ki Lagan', film: 'Paap (2003)', singers: 'Rahat Fateh Ali Khan', youtubeId: 'jUDP6LmgcCE' },
+      { title: 'Tere Chehre Pe', film: 'Baazigar (1993)', singers: 'Kumar Sanu, Sapna Mukherjee', youtubeId: 'lFgIFO3h6QU' },
+      { title: 'Kuch Tum Behko', film: 'Diljale (1996)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'u_ymhtNpC40' },
+      { title: 'Ek Baat Main Apne Dil Mein', film: 'Diljale (1996)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'HEwJ04XMAV8' },
+      { title: 'Gali Mein Aaj Chand Nikla', film: 'Zakhm (1998)', singers: 'Alka Yagnik', youtubeId: 'azEOf5PuqNA' },
+      { title: 'Raat Saari Beqarari Mein', film: 'Zakhm (1998)', singers: 'Alka Yagnik', youtubeId: 'YmrZqZAG_a0' },
+      { title: 'Pehli Pehli Baar Hai', film: 'Kya Yehi Pyaar Hai (2002)', singers: 'Alka Yagnik, Sonu Nigam', youtubeId: 'SAzDn1WbMYs' },
+      { title: 'Chhoti Chhoti Raatein', film: 'Tum Bin (2001)', singers: 'Sonu Nigam, Anuradha Paudwal', youtubeId: '_NyhCA6BJsM' },
+      { title: 'Koi Fariyaad', film: 'Tum Bin (2001)', singers: 'Jagjit Singh', youtubeId: '8MN2bxMiB9A' },
+      { title: 'Tum Bin Jiya Jaye Kaise', film: 'Tum Bin (2001)', singers: 'K.S. Chithra, Nikhil-Vinay', youtubeId: '5MnAPQRxy-g' },
+      { title: 'Tumhare Siva', film: 'Tum Bin (2001)', singers: 'Anuradha Paudwal, Udit Narayan', youtubeId: 'MAotiOc9wuM' },
+      { title: 'Aapke Pyaar Mein Hum Sanwar Gaye', film: 'Raaz (2002)', singers: 'Alka Yagnik', youtubeId: 'L6bSHDaDLyc' },
+      { title: 'Kitna Pyaara Hai', film: 'Raaz (2002)', singers: 'Alka Yagnik, Udit Narayan', youtubeId: 'fPgBPqdR7-c' },
+      { title: 'Zindagi Mein Toh Sabhi Pyar Kiya Karte Hain', film: 'Bewafa Sanam (1995)', singers: 'Sonu Nigam', youtubeId: 'M-nM8f27zWs' },
+      { title: 'Barson Ke Baad', film: 'Anjaam (1994)', singers: 'Alka Yagnik', youtubeId: 'UlvvyNBylBE' },
+      { title: 'Khoye Khoye Din', film: 'Hum Tumhare Hain Sanam (2002)', singers: 'Sonu Nigam', youtubeId: '6AcenqWPiMw' },
+      { title: 'Dil Tod Aaya', film: 'Hum Tumhare Hain Sanam (2002)', singers: 'Sonu Nigam', youtubeId: '25Afl0_bDos' },
+      { title: 'Kitni Bechain Hoke Tumse Mili', film: 'Kasoor (2001)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: '0JCLpa-r4Lg' },
+      { title: 'Zindagi Ban Gaye Ho Tum', film: 'Kasoor (2001)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'yKWnCagRWbA' },
+      { title: 'Dil Ka Aalam', film: 'Aashiqui (1990)', singers: 'Kumar Sanu', youtubeId: 'BaAoZA0fup0' },
+      { title: 'O Mere Sapno Ke Saudagar', film: 'Dil Hai Ke Manta Nahin (1991)', singers: 'Anuradha Paudwal', youtubeId: '03Aa_s5A3bY' },
+      { title: 'Dil Tujhpe Aa Gaya', film: 'Dil Hai Ke Manta Nahin (1991)', singers: 'Anuradha Paudwal, Abhijeet', youtubeId: 'T4Gynle0iEI' },
+      { title: 'Aashiq Banaya Aapne', film: 'Aashiq Banaya Aapne (2005)', singers: 'Himesh Reshammiya, Shreya Ghoshal', youtubeId: '0bAVd9jJE2Q' },
+      { title: 'Maar Dala', film: 'Devdas (2002)', singers: 'Kavita Krishnamurthy', youtubeId: 'g8waHAV2lwM' },
+      { title: 'Jaadu Hai Nasha Hai', film: 'Jism (2003)', singers: 'Shreya Ghoshal, Shaan', youtubeId: 'gTSL0Rv0am4' },
+      { title: 'Pyaar Ki Kashti Mein', film: 'Kaho Naa... Pyaar Hai (2000)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 't_oh_NkPtn0' },
+      { title: 'Yeh Dil Aashiqana', film: 'Yeh Dil Aashiqana (2002)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'ox2Mtg7QzSw' },
+      { title: 'Tumhein Apna Banane Ki Kasam Khai Hai', film: 'Sadak (1991)', singers: 'Kumar Sanu, Anuradha Paudwal', youtubeId: 'tPNwGuu_rQ4' },
+      { title: 'Hum Tere Bin Kahin Reh Nahi Paate', film: 'Sadak (1991)', singers: 'Manhar Udhas, Anuradha Paudwal', youtubeId: 'OxamnTFg3gw' },
+      { title: 'Tere Dar Pe Sanam Hum Chale Aaye', film: 'Phir Teri Kahani Yaad Aayee (1993)', singers: 'Kumar Sanu, Sadhana Sargam', youtubeId: '05o4kCUY2Ys' },
+      { title: 'Dil Deta Hai Ro Ro Duhaai', film: 'Phir Teri Kahani Yaad Aayee (1993)', singers: 'Pankaj Udhas', youtubeId: 'OCK6JtvEn24' },
+      { title: 'Aanewala Kal Ek Sapna Hai', film: 'Phir Teri Kahani Yaad Aayee (1993)', singers: 'Kumar Sanu', youtubeId: 'TD5bugWnUWs' },
+      { title: 'Wafa Na Raas Aayee Tujhe O Harjaee', film: 'Bewafa Sanam (1995)', singers: 'Nitin Mukesh', youtubeId: '0A2ue4lNMzo' },
+      { title: 'Nahin Yeh Ho Nahin Sakta', film: 'Barsaat (1995)', singers: 'Kumar Sanu, Sadhana Sargam', youtubeId: 'NNxf_AKuL0M' },
+      { title: 'Jo Haal Dil Ka', film: 'Sarfarosh (1999)', singers: 'Udit Narayan, Kumar Sanu, Alka Yagnik', youtubeId: 'Y9OnEE7FAcc' },
+      { title: 'Hoshwalon Ko Khabar Kya', film: 'Sarfarosh (1999)', singers: 'Jagjit Singh', youtubeId: 'ag3ENMEV89o' },
+      { title: 'Humko Sirf Tumse Pyaar Hai', film: 'Barsaat (1995)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'XORxoZS8FtA' },
+      { title: 'Mujhe Raat Din Bas', film: 'Sangharsh (1999)', singers: 'Sonu Nigam', youtubeId: 'DqkG0fuPiO0' },
+      { title: 'Ishq Samundar', film: 'Kaante (2002)', singers: 'Sunidhi Chauhan', youtubeId: 'zKyGZS6hPGY' },
+      { title: 'Humko Humise Chura Lo', film: 'Mohabbatein (2000)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'zWPsjhBaRb0' },
+      { title: 'Zinda Rehti Hain Mohabbatein', film: 'Mohabbatein (2000)', singers: 'Lata Mangeshkar', youtubeId: '1cWR8QVhJLE' },
+      { title: 'Aankhein Khuli', film: 'Mohabbatein (2000)', singers: 'Lata Mangeshkar, Udit Narayan', youtubeId: 'eM8Mjuq4MwQ' },
+      { title: 'O Humdum Suniyo Re', film: 'Saathiya (2002)', singers: 'KK, Shaan', youtubeId: '_9geEbZIAJM' },
+      { title: 'Chupke Se', film: 'Saathiya (2002)', singers: 'Sadhana Sargam', youtubeId: 'JLXfTmF9DSI' },
+      { title: 'Saathiya', film: 'Saathiya (2002)', singers: 'Sonu Nigam', youtubeId: 'eMA6GHTQ4WA' },
+      { title: 'Aawara Bhanwre', film: 'Sapnay (1997)', singers: 'Hema Sardesai, Malaysia Vasudevan', youtubeId: 'rZqlitLKwhw' },
+      { title: 'Kandhon Se Milte Hain Kandhe', film: 'Lakshya (2004)', singers: 'Sonu Nigam, Hariharan', youtubeId: 's_-tthrE0Hg' },
+      { title: 'Silsila Yeh Chaahat Ka', film: 'Devdas (2002)', singers: 'Shreya Ghoshal, Udit Narayan', youtubeId: 'yWNzKpUVkN8' },
+      { title: 'Bairi Piya', film: 'Devdas (2002)', singers: 'Udit Narayan, Shreya Ghoshal', youtubeId: 'c0udXSNMRhk' },
+      { title: 'Chand Taare', film: 'Yes Boss (1997)', singers: 'Abhijeet, Alka Yagnik', youtubeId: 'DIAcdeG70IE' },
+      { title: 'Maahi Ve (Kaante)', film: 'Kaante (2002)', singers: 'Richa Sharma, Sukhwinder Singh', youtubeId: '7OaW53bm7IU' },
+      { title: 'Dheeme Dheeme', film: 'Zubeidaa (2001)', singers: 'Kavita Krishnamurthy', youtubeId: 'xNFNKQtBtdI' },
+      { title: 'Meri Tarah Tum Bhi', film: 'Kya Yehi Pyaar Hai (2002)', singers: 'Alka Yagnik, Babul Supriyo', youtubeId: '8XEisjR49QY' },
+      { title: 'Sajna Ve Sajna', film: 'Chameli (2003)', singers: 'Sunidhi Chauhan', youtubeId: 'yR5B-00peGQ' },
+      { title: 'Allah Ke Bande', film: 'Waisa Bhi Hota Hai Part II (2003)', singers: 'Kailash Kher', youtubeId: 'KSwd2fYX9vg' },
+      { title: 'Kuch To Hua Hai', film: 'Kal Ho Naa Ho (2003)', singers: 'Alka Yagnik, Shaan', youtubeId: 'NMsvr4txH_g' },
+      { title: 'Mere Khayalon Ki Malika', film: 'Josh (2000)', singers: 'Abhijeet, Alka Yagnik', youtubeId: 'LtlZv_hd9fg' },
+      { title: 'Zindagi Maut Na Ban Jaaye', film: 'Sarfarosh (1999)', singers: 'Sonu Nigam, Roop Kumar Rathod', youtubeId: '2liZ16dgBgg' },
+      { title: 'Kabhi Khushi Kabhie Gham', film: 'Kabhi Khushi Kabhie Gham (2001)', singers: 'Lata Mangeshkar', youtubeId: '2wn3RHVpfxE' },
+      { title: 'Yeh Raat Aur Yeh Doorie', film: 'Andaz Apna Apna (1994)', singers: 'Asha Bhosle, Kumar Sanu', youtubeId: 'BG8sPVJl3s0' },
+      { title: 'Bahon Ke Darmiyan', film: 'Khamoshi: The Musical (1996)', singers: 'Alka Yagnik, Hariharan', youtubeId: 'kHYYfKAQdHA' },
+      { title: 'Saanwariya Saanwariya', film: 'Swades (2004)', singers: 'Alka Yagnik', youtubeId: 'wsnGhJy6Ibc' },
+      { title: 'Pal Pal Hai Bhaari', film: 'Swades (2004)', singers: 'A.R. Rahman', youtubeId: 'dRWr8OsVyjA' },
+      { title: 'Kabhi Neem Neem', film: 'Yuva (2004)', singers: 'Madhushree', youtubeId: '2Dh-X9oCHIY' },
+      { title: 'Tune Dil Mera Toda', film: 'Sanam Bewafa (1991)', singers: 'Lata Mangeshkar', youtubeId: 'nG85YFR3o6U' },
+      { title: 'Waada Raha Sanam', film: 'Khiladi (1992)', singers: 'Alka Yagnik, Abhijeet', youtubeId: '9b0iydtDZLU' },
+      { title: 'Kaun Main Haan Tum', film: 'Ajnabee (2001)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'FfKgX7Sf2qo' },
+      { title: 'Aksar Is Duniya Mein', film: 'Dhadkan (2000)', singers: 'Alka Yagnik', youtubeId: '-u1YYyRmmsc' },
+      { title: 'Hai Dil', film: 'Dil Ka Rishta (2003)', singers: 'Alka Yagnik, Kumar Sanu', youtubeId: 'BOEOSdwC7RA' },
+      { title: 'Sajan Sajan', film: 'Dil Ka Rishta (2003)', singers: 'Jaspinder Narula', youtubeId: 's7qOjXlW7d4' },
+      { title: 'Rind Posh Maal', film: 'Mission Kashmir (2000)', singers: 'Shankar Mahadevan', youtubeId: 'KnasuudnVIA' },
+      { title: 'Nasha Yeh Pyar Ka Nasha Hai', film: 'Mann (1999)', singers: 'Udit Narayan', youtubeId: 'J6laWLcBqK4' },
+      { title: 'Chhupana Bhi Nahin Aata', film: 'Baazigar (1993)', singers: 'Vinod Rathod', youtubeId: 'OsBqRHx2JAA' },
+      { title: 'Mujhe Neend Na Aaye', film: 'Dil (1990)', singers: 'Anuradha Paudwal, Udit Narayan', youtubeId: 'rrZcR4GzWq8' },
+      { title: 'Tumsa Koi Pyaara', film: 'Khuddar (1994)', singers: 'Kumar Sanu, Alka Yagnik', youtubeId: 'HubRXgH0Erc' },
+      { title: 'Tera Dilbar', film: 'Yeh Dil (2003)', singers: 'Alka Yagnik, Sonu Nigam', youtubeId: '9iXu3dvdVbM' },
+      { title: 'Jab Bhi Koi Haseena', film: 'Hera Pheri (2000)', singers: 'KK', youtubeId: 'kzdqSXwJXks' },
+      { title: 'Tujhe Yaad Na Meri Aayee', film: 'Kuch Kuch Hota Hai (1998)', singers: 'Udit Narayan, Alka Yagnik', youtubeId: 'vzWWTX83C_Q' },
+      { title: 'Kabhi Main Kahoon', film: 'Lamhe (1991)', singers: 'Vinod Rathod, Kavita Krishnamurthy', youtubeId: 'Mag04um99xg' },
     ],
   },
 };
 
 const SLOT_MINUTES = 4; // nominal per-song scheduling slot, used only to pick the live starting point
+const SONG_VOLUME = 60; // 0-100, YouTube player's own scale
+const AMBIENT_VOLUME = 0.4; // 0-1, HTMLMediaElement scale — audible under the song, not competing with it
 
 function istParts() {
   const fmt = new Intl.DateTimeFormat('en-US', {
@@ -253,7 +448,21 @@ function loadAmbientForCurrentScene() {
   if (ambientLoadedScene === currentScene) return;
   ambientLoadedScene = currentScene;
   ambientAudio.src = SCENES[currentScene].ambient;
+  ambientAudio.volume = AMBIENT_VOLUME;
   ambientAudio.load();
+}
+
+// Background music tracks the song's play/pause state — pausing the song
+// pauses the ambience too, and resuming the song brings it back, as long as
+// the listener has opted into background music via ambientToggle.
+function pauseAmbientIfOn() {
+  if (ambientOn) ambientAudio.pause();
+}
+
+function resumeAmbientIfOn() {
+  if (!ambientOn) return;
+  loadAmbientForCurrentScene();
+  ambientAudio.play().catch(() => {});
 }
 
 // ---------- background gif rotation (real footage, lazy) ----------
@@ -367,6 +576,7 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
     events: {
       onReady: () => {
         ytReady = true;
+        ytPlayer.setVolume(SONG_VOLUME);
         const { rotation, index, elapsedSeconds } = pickLiveStart();
         currentRotationSongs = rotation.songs;
         rotationLabel.textContent = rotation.label.toUpperCase();
@@ -380,6 +590,7 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
           loadSong(index, elapsedSeconds, true);
           setPlayingUI(true);
           startProgressLoop();
+          resumeAmbientIfOn();
         } else {
           loadSong(index, elapsedSeconds);
         }
@@ -409,8 +620,9 @@ function startProgressLoop() {
   }, 500);
 }
 
-// Song playback is the first priority — this button only ever talks to the
-// YouTube player, never touches the ambient layer.
+// Song playback is the first priority — pausing/resuming the song also
+// pauses/resumes background music (if the listener opted into it), so the
+// two layers never drift out of sync.
 playBtn.addEventListener('click', () => {
   if (!ytReady) {
     // API isn't ready yet — remember the intent and show a loading state
@@ -425,11 +637,13 @@ playBtn.addEventListener('click', () => {
   if (isPlaying) {
     ytPlayer.pauseVideo();
     setPlayingUI(false);
+    pauseAmbientIfOn();
   } else {
     playerStarted = true;
     ytPlayer.playVideo();
     setPlayingUI(true);
     startProgressLoop();
+    resumeAmbientIfOn();
   }
 });
 
@@ -472,22 +686,9 @@ ambientToggle.addEventListener('click', () => {
   }
 });
 
-// time-of-day ambient volume: a little livelier midday, quieter late at night
-function updateAmbientVolume() {
-  const { hour } = istParts();
-  let vol;
-  if (hour >= 11 && hour < 20) vol = 0.32;
-  else if (hour >= 20 && hour < 23) vol = 0.22;
-  else vol = 0.14;
-  ambientAudio.volume = vol;
-}
-
 // ---------- rotation change watcher ----------
 
-setInterval(() => {
-  refreshRotationIfChanged();
-  updateAmbientVolume();
-}, 60 * 1000);
+setInterval(refreshRotationIfChanged, 60 * 1000);
 
 // ---------- share card ----------
 
@@ -581,6 +782,5 @@ shareBtn.addEventListener('click', () => {
 // ---------- init ----------
 
 updateAmbientButtonLabel();
-updateAmbientVolume();
 updateClock();
 setInterval(updateClock, 15000);
