@@ -39,8 +39,14 @@ body {
   background: linear-gradient(180deg, #5a3a1e 0%, #2e1f12 45%, #120d08 100%);
 }
 
+/* Abstract, ornamented back-of-an-Indian-truck silhouette — pure inline SVG,
+   zero extra network request, so it never competes with the song loading.
+   Sits behind the real GIF and gets naturally covered once that crossfades in. */
 .bg-scene.scene-truck {
-  background: linear-gradient(180deg, #171a2b 0%, #100e18 45%, #08070a 100%);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 260'%3E%3Crect x='0' y='60' width='400' height='200' rx='10' fill='%23161320'/%3E%3Crect x='14' y='74' width='372' height='172' rx='6' fill='none' stroke='%23D98A3D' stroke-opacity='0.35' stroke-width='2'/%3E%3Ccircle cx='200' cy='160' r='58' fill='none' stroke='%23D98A3D' stroke-opacity='0.25' stroke-width='2'/%3E%3Ccircle cx='200' cy='160' r='40' fill='none' stroke='%23E8A25C' stroke-opacity='0.3' stroke-width='1.5'/%3E%3Ccircle cx='200' cy='160' r='22' fill='%23D98A3D' fill-opacity='0.18'/%3E%3Ccircle cx='46' cy='210' r='13' fill='%23c0392b' fill-opacity='0.85'/%3E%3Ccircle cx='46' cy='210' r='13' fill='none' stroke='%23F4EFE6' stroke-opacity='0.25' stroke-width='1.5'/%3E%3Ccircle cx='354' cy='210' r='13' fill='%23c0392b' fill-opacity='0.85'/%3E%3Ccircle cx='354' cy='210' r='13' fill='none' stroke='%23F4EFE6' stroke-opacity='0.25' stroke-width='1.5'/%3E%3Crect x='0' y='236' width='400' height='24' fill='%230c0a12'/%3E%3Crect x='20' y='240' width='40' height='4' fill='%23F4EFE6' fill-opacity='0.15'/%3E%3Crect x='340' y='240' width='40' height='4' fill='%23F4EFE6' fill-opacity='0.15'/%3E%3Cpolygon points='16,60 34,42 52,60' fill='%23E8A25C' fill-opacity='0.55'/%3E%3Cpolygon points='348,60 366,42 384,60' fill='%23E8A25C' fill-opacity='0.55'/%3E%3Ccircle cx='60' cy='50' r='3' fill='%23E8A25C' fill-opacity='0.7'/%3E%3Ccircle cx='110' cy='46' r='3' fill='%23D98A3D' fill-opacity='0.7'/%3E%3Ccircle cx='160' cy='44' r='3' fill='%23E8A25C' fill-opacity='0.7'/%3E%3Ccircle cx='210' cy='44' r='3' fill='%23D98A3D' fill-opacity='0.7'/%3E%3Ccircle cx='260' cy='46' r='3' fill='%23E8A25C' fill-opacity='0.7'/%3E%3Ccircle cx='310' cy='50' r='3' fill='%23D98A3D' fill-opacity='0.7'/%3E%3C/svg%3E")
+      no-repeat center 68% / min(520px, 78vw) auto,
+    linear-gradient(180deg, #171a2b 0%, #100e18 45%, #08070a 100%);
 }
 
 .bg-gif {
@@ -271,6 +277,12 @@ body {
 .play-btn:active { transform: scale(0.95); }
 .play-btn svg { margin-left: 2px; }
 
+.play-btn.loading { animation: playPulse 1s ease-in-out infinite; }
+@keyframes playPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
 .player-controls {
   display: flex;
   align-items: center;
@@ -344,4 +356,5 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .bg-scene, .bg-gif { transition: none; }
+  .play-btn.loading { animation: none; }
 }
