@@ -266,7 +266,7 @@ const ROTATIONS = {
     ],
   },
   night: {
-    label: 'Late Night Rotation',
+    label: 'Midnight Highway',
     scene: 'truck',
     songs: [
       { title: 'O Re Chhori', film: 'Lagaan (2001)', singers: 'Alka Yagnik, Udit Narayan', youtubeId: '3PIKesjmQTs' },
@@ -424,6 +424,13 @@ const progressFill = el('progressFill');
 const ambientToggle = el('ambientToggle');
 const ambientAudio = el('ambientAudio');
 const shareBtn = el('shareBtn');
+const removalLink = el('removalLink');
+const removalOverlay = el('removalOverlay');
+const removalMessage = el('removalMessage');
+const removalEmail = el('removalEmail');
+const removalStatus = el('removalStatus');
+const removalSubmit = el('removalSubmit');
+const removalCancel = el('removalCancel');
 const bgScene = el('bgScene');
 const bgGif = el('bgGif');
 const clockEl = el('clock');
@@ -864,6 +871,65 @@ shareBtn.addEventListener('click', () => {
       shareBtn.title = originalTitle;
     }, 1400);
   }, 'image/png');
+});
+
+// ---------- removal request (sends a real email via /api/removal-request) ----------
+
+function openRemovalModal() {
+  removalMessage.value = '';
+  removalEmail.value = '';
+  removalStatus.hidden = true;
+  removalStatus.textContent = '';
+  removalOverlay.hidden = false;
+  removalMessage.focus();
+}
+
+function closeRemovalModal() {
+  removalOverlay.hidden = true;
+}
+
+removalLink.addEventListener('click', openRemovalModal);
+removalCancel.addEventListener('click', closeRemovalModal);
+
+removalOverlay.addEventListener('click', (e) => {
+  if (e.target === removalOverlay) closeRemovalModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !removalOverlay.hidden) closeRemovalModal();
+});
+
+removalSubmit.addEventListener('click', async () => {
+  const message = removalMessage.value.trim();
+  if (!message) {
+    removalStatus.hidden = false;
+    removalStatus.textContent = 'let us know which song, and why.';
+    return;
+  }
+
+  removalSubmit.disabled = true;
+  removalSubmit.textContent = 'sending…';
+  removalStatus.hidden = true;
+
+  try {
+    const res = await fetch('/api/removal-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, fromEmail: removalEmail.value.trim() }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'failed to send');
+
+    removalStatus.hidden = false;
+    removalStatus.textContent = 'sent — thank you.';
+    setTimeout(closeRemovalModal, 1500);
+  } catch (err) {
+    removalStatus.hidden = false;
+    removalStatus.textContent = 'something went wrong — please try again.';
+  } finally {
+    removalSubmit.disabled = false;
+    removalSubmit.textContent = 'send request';
+  }
 });
 
 // ---------- init ----------
