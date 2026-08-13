@@ -146,7 +146,7 @@ export const ROTATIONS = {
     ],
   },
   afternoon: {
-    label: 'Afternoon Rotation',
+    label: 'Barbershop Afternoons',
     scene: 'barber',
     songs: [
       { title: 'Tu Cheez Badi Hai Mast Mast', film: 'Mohra (1994)', singers: 'Udit Narayan, Kavita Krishnamurthy', youtubeId: 'DHWVkvhQB3U' },
