@@ -9,6 +9,7 @@ import { createAtmosphere } from './atmosphere.js';
 import { createSleepTimer } from './sleep-timer.js';
 import { createRemovalModal } from './removal-modal.js';
 import { createShareCard } from './share-card.js';
+import { createVisitorCount } from './visitor-count.js';
 
 const el = (id) => document.getElementById(id);
 
@@ -145,3 +146,5 @@ createRemovalModal({
   submitEl: el('removalSubmit'),
   cancelEl: el('removalCancel'),
 });
+
+createVisitorCount({ labelEl: el('visitorCount') });

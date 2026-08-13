@@ -116,6 +116,16 @@ body {
   color: rgba(244, 239, 230, 0.72);
 }
 
+.visitor-count {
+  margin-top: 4px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-strong);
+  font-variant-numeric: tabular-nums;
+}
+
 .topbar-right {
   display: flex;
   gap: 8px;
